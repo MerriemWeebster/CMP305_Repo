@@ -108,7 +108,7 @@ public:
     friend ostream& operator<<(ostream& outs, const Matrix& rhs){
       for(int i=0;i<rhs.rows;i++){
           for(int j=0;j<rhs.cols;j++){
-              outs<<rhs[i][j]<<" ";
+              outs<<rhs.arr[i][j]<<" ";
           }
           outs<<endl;
       }
@@ -119,7 +119,7 @@ public:
     {
         for(int i=0;i<rhs.rows;i++){
             for(int j=0;j<rhs.cols;j++){
-                ins>>rhs[i][j];
+                ins>>rhs.arr[i][j];
             }
         }
         return ins;
@@ -265,7 +265,7 @@ int main() {
 
     Matrix<int> C(3,2);
     cin>>C;
-    cout<<"The Third year's details are:"
+    cout<<"The Third year's details are:";
     cout<<C-Sum<<endl;
 
     //Part 2 for ex2 to be done
