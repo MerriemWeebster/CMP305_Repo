@@ -13,9 +13,9 @@ private:
 public:
     Matrix(int r = 4, int c = 4): rows(r), cols(c)
     {
-        arr= new T* [rows];
-        for(int i=0;i<rows;i++) {
-            arr[i] = new T[cols];
+        arr= new T* [r];
+        for(int i=0;i<r;i++) {
+            arr[i] = new T[c];
         }
     }
     Matrix(const Matrix &rhs)
@@ -36,13 +36,10 @@ public:
 
     Matrix operator=(const Matrix &rhs)
     {
-        if(rows != rhs.rows || cols != rhs.cols)
-        {
-            for(int i = 0; i < rows; i++)
-            {
-                delete arr[i];
+        if(rows != rhs.rows || cols != rhs.cols){
+            for(int i = 0; i < rows; i++){
+                delete[] arr[i];
             }
-
             delete[] arr;
 
             arr= new T* [rhs.rows];
@@ -50,8 +47,6 @@ public:
                 arr[i] = new T[rhs.cols];
             }
         }
-
-
         rows=rhs.rows;
         cols=rhs.cols;
 
@@ -60,6 +55,7 @@ public:
                 arr[i][j]=rhs.arr[i][j];
             }
         }
+        return *this;
     }
     bool operator == (const Matrix& rhs)
     {
@@ -87,6 +83,7 @@ public:
                 arr[i][j] += rhs.arr[i][j];
             }
         }
+        return *this;
     }
 
     Matrix operator -= (const Matrix& rhs)
@@ -96,6 +93,7 @@ public:
                 arr[i][j] -= rhs.arr[i][j];
             }
         }
+        return *this;
     }
 
 
