@@ -84,24 +84,49 @@ public:
     
     friend Matrix operator + (const Matrix& m1, const Matrix& m2)
     {
+<<<<<<< HEAD
         
+=======
+       Matrix ans(m1.rows,m2.rows);
+       for(int i=0;i<m1.rows;i++){
+           for(int j=0;j<m1.cols;j++){
+               ans.arr[i][j]=m1.arr[i][j]+m2.arr[i][j];
+           }
+       }
+       return ans;
+>>>>>>> 2feab8dc445ca28a2e31c309c20ddbf7156dbc17
     }
     
     friend Matrix operator - (const Matrix& m1, const Matrix& m2)
     {
-       
+        Matrix ans(m1.rows,m2.rows);
+        for(int i=0;i<m1.rows;i++){
+            for(int j=0;j<m1.cols;j++){
+                ans.arr[i][j]=m1.arr[i][j]-m2.arr[i][j];
+            }
+        }
+        return ans;
     }
 
     
-    friend ostream& operator<<(ostream& outs, const Matrix& rhs)
-    {
-      
+    friend ostream& operator<<(ostream& outs, const Matrix& rhs){
+      for(int i=0;i<rhs.rows;i++){
+          for(int j=0;j<rhs.cols;j++){
+              outs<<rhs[i][j]<<" ";
+          }
+          outs<<endl;
+      }
+      return outs;
     }
    
     friend istream& operator>>(istream& ins, Matrix& rhs)
     {
-       
-      
+        for(int i=0;i<rhs.rows;i++){
+            for(int j=0;j<rhs.cols;j++){
+                ins>>rhs[i][j];
+            }
+        }
+        return ins;
     }
 
     
