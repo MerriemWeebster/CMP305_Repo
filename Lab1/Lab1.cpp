@@ -36,8 +36,25 @@ public:
 
     Matrix operator=(const Matrix &rhs)
     {
+        if(rows != rhs.rows || cols != rhs.cols)
+        {
+            for(int i = 0; i < rows; i++)
+            {
+                delete arr[i];
+            }
+
+            delete[] arr;
+
+            arr= new T* [rhs.rows];
+            for(int i=0;i<rhs.rows;i++) {
+                arr[i] = new T[rhs.cols];
+            }
+        }
+
+
         rows=rhs.rows;
         cols=rhs.cols;
+
         for(int i=0;i<rows;i++){
             for(int j=0;j<cols;j++){
                 arr[i][j]=rhs.arr[i][j];
