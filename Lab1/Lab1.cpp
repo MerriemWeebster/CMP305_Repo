@@ -289,10 +289,10 @@ int main() {
     cout<<"The Third year's details are:"<<endl;
     cout<<C-Sum<<endl;
 
-    int total{0};
-    for(int i=0;i<C.getCols();i++){
-        for(int j=0;j<C.getRows();j++){
-            total+=C(j,i);
+    float total=0;
+    for(int i=0;i<C.getRows();i++){
+        for(int j=0;j<C.getCols();j++){
+            total+=C(i,j);
         }
     }
     cout<<"The average number of wins are: ";
@@ -300,13 +300,12 @@ int main() {
     for(int j=0;j<C.getRows();j++){
         winSum+=C(j,0);
     }
-    cout<<winSum/total;
+    cout<<(winSum/total);
     cout<<"\nThe average number of losses are:";
     int lossSum=0;
     for(int j=0;j<C.getRows();j++){
         lossSum+=C(j,1);
     }
-    cout<<lossSum/total;
-
+    cout<<(lossSum/total);
     return 0;
 }
