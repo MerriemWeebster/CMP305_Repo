@@ -279,7 +279,7 @@ int main() {
     cin>>A;
     cout<<"Enter B:"<<endl;
     cin>>B;
-    Matrix<int> Sum=A+B;
+    Matrix<int> Sum=(A+B);
     cout<<"A+B="<<endl;
     cout<<Sum<<endl;
 
@@ -296,13 +296,13 @@ int main() {
         }
     }
     cout<<"The average number of wins are: ";
-    int winSum{0};
+    int winSum=0;
     for(int j=0;j<C.getRows();j++){
         winSum+=C(j,0);
     }
     cout<<winSum/total;
     cout<<"\nThe average number of losses are:";
-    int lossSum{0};
+    int lossSum=0;
     for(int j=0;j<C.getRows();j++){
         lossSum+=C(j,1);
     }
