@@ -209,7 +209,18 @@ int main() {
    
     //Ex2 Bonus
     
-    
+    Matrix <int> A(3,2),B(3,2);
+    cin>>A;
+    cin>>B;
+    Matrix<int> Sum=A+B;
+    cout<<Sum<<endl;
+
+    Matrix<int> C(3,2);
+    cin>>C;
+    cout<<"The Third year's details are:"
+    cout<<C-Sum<<endl;
+
+    //Part 2 for ex2 to be done
     return 0;
 }
 
