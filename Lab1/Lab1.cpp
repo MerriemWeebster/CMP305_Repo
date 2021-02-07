@@ -174,13 +174,13 @@ public:
     }
     Matrix operator++(int)//post increment
     {
-        Matrix temp;
+        Matrix<T> temp = *this;
 
-        for(int i = 0; i < rows; i++)
+        for(int i = 0; i < temp.rows; i++)
         {
-            for(int j = 0; j < cols; j++)
+            for(int j = 0; j < temp.cols; j++)
             {
-                temp.arr[i][j] = arr[i][j]++;
+                temp.arr[i][j] = temp.arr[i][j]++;
             }
         }
 
