@@ -14,7 +14,7 @@ public:
     Matrix(int r = 4, int c = 4): rows(r), cols(c)
     {
         arr= new T* [rows];
-        for(int i;i<cols;i++) {
+        for(int i;i<rows;i++) {
             arr[i] = new T[cols];
         }
     }
@@ -84,8 +84,7 @@ public:
     
     friend Matrix operator + (const Matrix& m1, const Matrix& m2)
     {
-       
-       
+        
     }
     
     friend Matrix operator - (const Matrix& m1, const Matrix& m2)
@@ -115,16 +114,22 @@ public:
     {
         
     }
-    Matrix& operator++(){       // Pre increment.
+
+    Matrix& operator++()
+    {       // Pre increment.
        
     }
     Matrix operator++(int)//post increment
     {
        
-       
     }
+    
     ~Matrix()
     {
+        for(int i = 0; i < rows; i++)
+        {
+            delete arr[i];
+        }
 
         delete[] arr;
     }
