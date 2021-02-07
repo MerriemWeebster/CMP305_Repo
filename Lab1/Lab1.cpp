@@ -3,7 +3,7 @@
 using namespace std;
 template<class T>
 class Matrix
-        //wow this is really cool
+    //wow this is really cool
 {
 
 private:
@@ -14,7 +14,7 @@ public:
     Matrix(int r = 4, int c = 4): rows(r), cols(c)
     {
         arr= new T* [rows];
-        for(int i;i<rows;i++) {
+        for(int i=0;i<rows;i++) {
             arr[i] = new T[cols];
         }
     }
@@ -23,7 +23,7 @@ public:
         rows=rhs.rows;
         cols=rhs.cols;
         arr= new T* [rows];
-        for(int i;i<rows;i++) {
+        for(int i=0;i<rows;i++) {
             arr[i] = new T[cols];
         }
         for(int i=0;i<rows;i++){
@@ -32,8 +32,8 @@ public:
             }
         }
     }
-    
-    
+
+
     Matrix operator=(const Matrix &rhs)
     {
         rows=rhs.rows;
@@ -71,7 +71,7 @@ public:
             }
         }
     }
-    
+
     Matrix operator -= (const Matrix& rhs)
     {
         for(int i=0;i<rows;i++) {
@@ -81,18 +81,18 @@ public:
         }
     }
 
-    
+
     friend Matrix operator + (const Matrix& m1, const Matrix& m2)
     {
-       Matrix ans(m1.rows,m2.rows);
-       for(int i=0;i<m1.rows;i++){
-           for(int j=0;j<m1.cols;j++){
-               ans.arr[i][j]=m1.arr[i][j]+m2.arr[i][j];
-           }
-       }
-       return ans;
+        Matrix ans(m1.rows,m2.rows);
+        for(int i=0;i<m1.rows;i++){
+            for(int j=0;j<m1.cols;j++){
+                ans.arr[i][j]=m1.arr[i][j]+m2.arr[i][j];
+            }
+        }
+        return ans;
     }
-    
+
     friend Matrix operator - (const Matrix& m1, const Matrix& m2)
     {
         Matrix ans(m1.rows,m2.rows);
@@ -104,19 +104,20 @@ public:
         return ans;
     }
 
-    
+
     friend ostream& operator<<(ostream& outs, const Matrix& rhs){
-      for(int i=0;i<rhs.rows;i++){
-          for(int j=0;j<rhs.cols;j++){
-              outs<<rhs.arr[i][j]<<" ";
-          }
-          outs<<endl;
-      }
-      return outs;
+        for(int i=0;i<rhs.rows;i++){
+            for(int j=0;j<rhs.cols;j++){
+                outs<<rhs.arr[i][j]<<" ";
+            }
+            outs<<endl;
+        }
+        return outs;
     }
-   
+
     friend istream& operator>>(istream& ins, Matrix& rhs)
     {
+
         for(int i=0;i<rhs.rows;i++){
             for(int j=0;j<rhs.cols;j++){
                 ins>>rhs.arr[i][j];
@@ -125,7 +126,7 @@ public:
         return ins;
     }
 
-    
+
     T& operator () (const int r_index, const int c_index)
     {
         if(r_index < 0 || r_index >= rows)
@@ -142,7 +143,7 @@ public:
 
         return arr[r_index][c_index];
     }
-    
+
     const T& operator () (const int r_index, const int c_index) const
     {
         if(r_index < 0 || r_index >= rows)
@@ -170,7 +171,7 @@ public:
             }
         }
 
-        return *this; // We Return The Address As The Function Is Cascading 
+        return *this; // We Return The Address As The Function Is Cascading
     }
     Matrix operator++(int)//post increment
     {
@@ -186,7 +187,7 @@ public:
 
         return temp;
     }
-    
+
     ~Matrix()
     {
         for(int i = 0; i < rows; i++)
@@ -197,9 +198,9 @@ public:
         delete[] arr;
     }
     //Bonus
-    
-    
-    
+
+
+
 };
 
 int main() {
@@ -251,12 +252,12 @@ int main() {
     a(index1, index2) = value;
     cout << "A[" << index1 << "," << index2 << "] = " << a(index1, index2) << endl;
     cout << "New values of a : \n" << a;
-    
+
     cout<<"Post increment A:"<<endl<<a++<<endl;
     cout<<"Pre increment A:"<<endl<<++a<<endl;
-   
+
     //Ex2 Bonus
-    
+    /*
     Matrix <int> A(3,2),B(3,2);
     cin>>A;
     cin>>B;
@@ -267,10 +268,7 @@ int main() {
     cin>>C;
     cout<<"The Third year's details are:";
     cout<<C-Sum<<endl;
-
+*/
     //Part 2 for ex2 to be done
     return 0;
 }
-
-
-
