@@ -13,36 +13,72 @@ private:
 public:
     Matrix(int r = 4, int c = 4): rows(r), cols(c)
     {
-         
+        arr= new T* [rows];
+        for(int i;i<cols;i++) {
+            arr[i] = new T[cols];
+        }
     }
     Matrix(const Matrix &rhs)
     {
-        
-       
-
+        rows=rhs.rows;
+        cols=rhs.cols;
+        arr= new T* [rows];
+        for(int i;i<rows;i++) {
+            arr[i] = new T[cols];
+        }
+        for(int i=0;i<rows;i++){
+            for(int j=0;j<cols;j++){
+                arr[i][j]=rhs.arr[i][j];
+            }
+        }
     }
     
     
     Matrix operator=(const Matrix &rhs)
     {
-
+        rows=rhs.rows;
+        cols=rhs.cols;
+        for(int i=0;i<rows;i++){
+            for(int j=0;j<cols;j++){
+                arr[i][j]=rhs.arr[i][j];
+            }
+        }
     }
     bool operator == (const Matrix& rhs)
     {
-       
-       
-
+        if(*this==rhs){
+            return true;
+        }
+        if(rows!=rhs.rows || cols!=rhs.cols){
+            return false;
+        }
+        bool equal=true;
+        for(int i=0;i<rows;i++){
+            for(int j=0;j<cols;j++){
+                if(arr[i][j]!=rhs.arr[i][j]){
+                    equal=false;
+                    break;
+                }
+            }
+        }
+        return equal;
     }
     Matrix operator += (const Matrix& rhs)
     {
-        
-       
-
+        for(int i=0;i<rows;i++) {
+            for (int j = 0; j < cols; j++) {
+                arr[i][j] += rhs.arr[i][j];
+            }
+        }
     }
     
     Matrix operator -= (const Matrix& rhs)
     {
-       
+        for(int i=0;i<rows;i++) {
+            for (int j = 0; j < cols; j++) {
+                arr[i][j] -= rhs.arr[i][j];
+            }
+        }
     }
 
     
@@ -58,7 +94,7 @@ public:
     }
 
     
-    friend    ostream& operator<<(ostream& outs, const Matrix& rhs)
+    friend ostream& operator<<(ostream& outs, const Matrix& rhs)
     {
       
     }
@@ -89,6 +125,7 @@ public:
     }
     ~Matrix()
     {
+
         delete[] arr;
     }
     //Bonus
