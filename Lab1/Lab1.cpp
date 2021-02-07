@@ -148,13 +148,13 @@ public:
         if(r_index < 0 || r_index >= rows)
         {
             cout << "Row Index out of bounds";
-            exit(2);
+            exit(4);
         }
 
         if(c_index < 0 || c_index >= cols)
         {
             cout << "Col Index out of bounds";
-            exit(3);
+            exit(5);
         }
 
         return arr[r_index][c_index];
