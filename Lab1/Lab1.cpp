@@ -209,6 +209,12 @@ public:
     }
     //Bonus
 
+    int getRows(){
+        return rows;
+    }
+    int getCols(){
+        return cols;
+    }
 
 
 };
@@ -267,7 +273,7 @@ int main() {
     cout<<"Pre increment A:"<<endl<<++a<<endl;
 
     //Ex2 Bonus
-    /*
+
     Matrix <int> A(3,2),B(3,2);
     cin>>A;
     cin>>B;
@@ -278,7 +284,27 @@ int main() {
     cin>>C;
     cout<<"The Third year's details are:";
     cout<<C-Sum<<endl;
-*/
-    //Part 2 for ex2 to be done
+
+
+
+    int total{0};
+    for(int i=0;i<C.getCols();i++){
+        for(int j=0;j<C.getRows();j++){
+            total+=C(j,i);
+        }
+    }
+    cout<<"The average number of wins are: ";
+    int winSum{0};
+    for(int j=0;j<C.getRows();j++){
+        winSum+=C(j,0);
+    }
+    cout<<winSum/total;
+    cout<<"\nThe average number of losses are:";
+    int lossSum{0};
+    for(int j=0;j<C.getRows();j++){
+        lossSum+=C(j,1);
+    }
+    cout<<lossSum/total;
+
     return 0;
 }
