@@ -191,7 +191,7 @@ public:
         {
             for(int j = 0; j < temp.cols; j++)
             {
-                temp.arr[i][j] = temp.arr[i][j]++;
+                temp.arr[i][j]++;
             }
         }
 
