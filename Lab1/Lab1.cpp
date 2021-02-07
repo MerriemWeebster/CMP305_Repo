@@ -275,17 +275,19 @@ int main() {
     //Ex2 Bonus
 
     Matrix <int> A(3,2),B(3,2);
+    cout<<"Enter A:"<<endl;
     cin>>A;
+    cout<<"Enter B:"<<endl;
     cin>>B;
     Matrix<int> Sum=A+B;
+    cout<<"A+B="<<endl;
     cout<<Sum<<endl;
 
     Matrix<int> C(3,2);
+    cout<<"Enter C:"<<endl;
     cin>>C;
-    cout<<"The Third year's details are:";
+    cout<<"The Third year's details are:"<<endl;
     cout<<C-Sum<<endl;
-
-
 
     int total{0};
     for(int i=0;i<C.getCols();i++){
