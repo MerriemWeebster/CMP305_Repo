@@ -105,7 +105,7 @@ public:
 
     friend Matrix operator - (const Matrix& m1, const Matrix& m2)
     {
-        Matrix ans(m1.rows,m2.rows);
+        Matrix ans(m1.rows,m2.cols);
         for(int i=0;i<m1.rows;i++){
             for(int j=0;j<m1.cols;j++){
                 ans.arr[i][j]=m1.arr[i][j]-m2.arr[i][j];
