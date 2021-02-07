@@ -59,22 +59,17 @@ public:
     }
     bool operator == (const Matrix& rhs)
     {
-        if(*this==rhs){
-            return true;
-        }
         if(rows!=rhs.rows || cols!=rhs.cols){
             return false;
         }
-        bool equal=true;
         for(int i=0;i<rows;i++){
             for(int j=0;j<cols;j++){
                 if(arr[i][j]!=rhs.arr[i][j]){
-                    equal=false;
-                    break;
+                    return false;
                 }
             }
         }
-        return equal;
+        return true;
     }
     Matrix operator += (const Matrix& rhs)
     {
