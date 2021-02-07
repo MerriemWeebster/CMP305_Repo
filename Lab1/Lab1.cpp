@@ -14,7 +14,7 @@ public:
     Matrix(int r = 4, int c = 4): rows(r), cols(c)
     {
         arr= new T* [rows];
-        for(int i;i<cols;i++) {
+        for(int i;i<rows;i++) {
             arr[i] = new T[cols];
         }
     }
@@ -128,23 +128,71 @@ public:
     
     T& operator () (const int r_index, const int c_index)
     {
-       
+        if(r_index < 0 || r_index >= rows)
+        {
+            cout << "Row Index out of bounds";
+            exit(2);
+        }
+
+        if(c_index < 0 || c_index >= cols)
+        {
+            cout << "Col Index out of bounds";
+            exit(3);
+        }
+
+        return arr[r_index][c_index];
     }
     
     const T& operator () (const int r_index, const int c_index) const
     {
-        
+        if(r_index < 0 || r_index >= rows)
+        {
+            cout << "Row Index out of bounds";
+            exit(2);
+        }
+
+        if(c_index < 0 || c_index >= cols)
+        {
+            cout << "Col Index out of bounds";
+            exit(3);
+        }
+
+        return arr[r_index][c_index];
     }
-    Matrix& operator++(){       // Pre increment.
-       
+
+    Matrix& operator++()
+    {       // Pre increment.
+        for (int i = 0; i < rows; i++) // To Loop Through The Rows
+        {
+            for (int j = 0; j < cols; j++) // To Loop Through The Columns
+            {
+                ++arr[i][j]; // Increment The Element
+            }
+        }
+
+        return *this; // We Return The Address As The Function Is Cascading 
     }
     Matrix operator++(int)//post increment
     {
-       
-       
+        Matrix temp;
+
+        for(int i = 0; i < rows; i++)
+        {
+            for(int j = 0; j < cols; j++)
+            {
+                temp.arr[i][j] = arr[i][j]++;
+            }
+        }
+
+        return temp;
     }
+    
     ~Matrix()
     {
+        for(int i = 0; i < rows; i++)
+        {
+            delete arr[i];
+        }
 
         delete[] arr;
     }
