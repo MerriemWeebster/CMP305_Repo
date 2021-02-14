@@ -7,7 +7,8 @@
 #include "Person.h"
 #include "Task.h"
 using namespace std;
-
+template< class Container1, class Container2 >
+void rotateTasks(Container1 team, Container2 tasks);
 //funtion to print menu
 void printMenu()
 {
@@ -32,7 +33,7 @@ int main()
 		cout << "File Not Found \n";
 		exit(1);
 	}
-	
+
 	string fname, lname;
 	int phNum;
 	//Reading contacts from file
@@ -42,7 +43,7 @@ int main()
 		team.push_back(td);
 	}
 	myCin.close();
-	
+
 	//This is for bonus
 	//Reading tasks from a file
 	list<Task> tasks; //or vector<Task> tasks;
@@ -59,7 +60,7 @@ int main()
 	{
 		Task td(taskID, taskName, taskDuration);
 		tasks.push_back(td);
-		
+
 	}
 	myCin.close();
 
@@ -67,7 +68,7 @@ int main()
 	int action = 0;
 	printMenu();
 	cin >> action;
-   
+
 	while (action != 7)
 	{  found = false;
 		switch (action)
@@ -77,7 +78,7 @@ int main()
 			cin >> fname;
 			cin >> lname;
 			//your code goes here
-                
+
             for(auto it = team.begin(); it != team.end() || !found; ++it)
             {
                 if(it->getFirstName() == fname && it->getLastName() == lname)
@@ -86,10 +87,10 @@ int main()
                     found = true;
                 }
             }
-            
+
             if(!found)
                 cout << "Person not found.\n";
-                
+
 			break;
 		case 2: //Add a new Person
 			cout << "Enter First Name: ";
@@ -102,17 +103,17 @@ int main()
 			cin >> phNum;
 			cout << endl;
 			//your code goes here
-                
+
 		    team.push_back(Person(phNum, fname, lname));
-		    
+
 		    cout << "New user added.\n";
- 
+
 			break;
 		case 3:  //Delete a Person by entering Phone Number
 			cout << "Please enter a Phone Number to delete the contact: ";
 			cin >> phNum;
 			//your code goes here
-                
+
             for(auto it = team.begin(); it != team.end() || !found; ++it)
             {
                 if(it->getPhNum() == phNum)
@@ -122,38 +123,34 @@ int main()
                     found = true;
                 }
             }
-            
+
             if(!found)
                 cout << "Person not found.\n";
 
 			break;
-		
+
 		case 4: //Print team in current order
 			cout << "All persons in the team are: " << endl;
 			//your code goes here
-			
+
 			for(auto it = team.begin(); it != team.end(); ++it)
                 cout << it->getFirstName() << "\t" << it->getLastName() << "\t" << it->getPhNum() << endl;
-							
+
 			break;
 
 		case 5: //Print team in reverse order
 			cout << "All persons in the team in reverse order are: " << endl;
 			//your code goes here
-			
+
 			for(auto it = team.rbegin(); it != team.rend(); ++it)
                 cout << it->getFirstName() << "\t" << it->getLastName() << "\t" << it->getPhNum() << endl;
-			
+
 			break;
 
 			//Bonus
-		case 6: //Bonus part: Assign Tasks 
-			int days;
-			cout << "Enter number of Days: ";
-			cin >> days;
-			
+		case 6: //Bonus part: Assign Tasks
+            rotateTasks(team,tasks)
 			//your code goes here
-			
 		}
 		cout << endl;
 
@@ -170,6 +167,32 @@ int main()
 	}
 	myCin.close();
 	myCout.close();
+}
 
-	
+
+template< class Container1, class Container2 >
+void rotateTasks(Container1 team, Container2 tasks) {
+    cout << "Enter number of days: ";
+    int numdays;
+    cin >> numdays;
+    cout << "Available team members: \n";
+    for (auto it = team.begin(); it != team.end(); ++it) {
+        cout << it->getFirstName() << " ";
+    }
+
+    cout << "\n\t";
+    for (auto it = tasks.begin(); it != tasks.end(); ++it) {
+        cout << it->getTasktName() << "\t";
+    }
+    cout << "Enjoying No Duty..........\n\n";
+
+
+    for (int i = 1; i <= numdays; i++) {
+        cout << "day" << i << "\t";
+        for (auto it = team.begin(); it != team.end(); ++it) {
+            cout << it->getFirstName() << "\t";
+        }
+        std::rotate(team.rbegin(), std::next(team.rbegin()),team.rend());
+        cout << endl << endl;
+    }
 }
