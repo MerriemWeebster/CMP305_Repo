@@ -1,0 +1,4 @@
+100 Water 1
+200 Firewood 2
+300 Cooking 3
+400 Cleaning 2
