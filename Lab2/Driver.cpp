@@ -149,7 +149,7 @@ int main()
 
 			//Bonus
 		case 6: //Bonus part: Assign Tasks
-            rotateTasks(team,tasks)
+            rotateTasks(team,tasks);
 			//your code goes here
 		}
 		cout << endl;
