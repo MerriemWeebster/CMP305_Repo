@@ -78,7 +78,18 @@ int main()
 			cin >> lname;
 			//your code goes here
                 
-                  
+            for(auto it = team.begin(); it != team.end() || !found; ++it)
+            {
+                if(it->getFirstName() == fname && it->getLastName() == lname)
+                {
+                    cout << "Phone Number: " << it->getPhNum() << endl;
+                    found = true;
+                }
+            }
+            
+            if(!found)
+                cout << "Person not found.\n";
+                
 			break;
 		case 2: //Add a new Person
 			cout << "Enter First Name: ";
@@ -92,8 +103,9 @@ int main()
 			cout << endl;
 			//your code goes here
                 
-              
-			
+		    team.push_back(Person(phNum, fname, lname));
+		    
+		    cout << "New user added.\n";
  
 			break;
 		case 3:  //Delete a Person by entering Phone Number
@@ -101,18 +113,36 @@ int main()
 			cin >> phNum;
 			//your code goes here
                 
+            for(auto it = team.begin(); it != team.end() || !found; ++it)
+            {
+                if(it->getPhNum() == phNum)
+                {
+                    it = team.erase(it);
+                    cout << "Person Deleted\n";
+                    found = true;
+                }
+            }
+            
+            if(!found)
+                cout << "Person not found.\n";
 
 			break;
 		
 		case 4: //Print team in current order
 			cout << "All persons in the team are: " << endl;
 			//your code goes here
+			
+			for(auto it = team.begin(); it != team.end(); ++it)
+                cout << it->getFirstName() << "\t" << it->getLastName() << "\t" << it->getPhNum() << endl;
 							
 			break;
 
 		case 5: //Print team in reverse order
 			cout << "All persons in the team in reverse order are: " << endl;
 			//your code goes here
+			
+			for(auto it = team.rbegin(); it != team.rend(); ++it)
+                cout << it->getFirstName() << "\t" << it->getLastName() << "\t" << it->getPhNum() << endl;
 			
 			break;
 
@@ -123,7 +153,6 @@ int main()
 			cin >> days;
 			
 			//your code goes here
-			
 			
 		}
 		cout << endl;
@@ -144,4 +173,3 @@ int main()
 
 	
 }
-
