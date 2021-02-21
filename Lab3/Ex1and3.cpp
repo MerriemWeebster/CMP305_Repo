@@ -92,27 +92,72 @@ bool eraseSLL(SingleNode<Object>*& head, Object givenValue) {
 }
 
 //bonus
-/*
+
 template <typename Object>
 bool insertBeforeSLL(SingleNode<Object>*& head, Object givenValue, Object newValue)
 {
-    
+    SingleNode<Object>* thisnode = head;
+    SingleNode<Object>* prevnode = head;
+    SingleNode<Object>* newNode = new SingleNode<Object>(newValue);
+    while (thisnode != nullptr) {
+        if (thisnode->data == givenValue) {
 
+            if (thisnode == head) {
+                newNode->next = prevnode;
+                head = newNode;
+            }
+            else {
+                newNode->next = prevnode->next;
+                prevnode->next = newNode;
+            }
+            return true;
+        }
+        prevnode = thisnode;
+        thisnode = thisnode->next;
+    }
+    return false;
 }
+
 template <typename Object>
 bool removeDuplicates (SingleNode<Object>*& head, Object givenValue)
 {
-  
-   
+    SingleNode<Object>* thisnode = head;
+    SingleNode<Object>* prevnode = head;
+    bool FoundOnce = false;
+    bool deleted = false;
+    while (thisnode != nullptr) {
+        if (thisnode->data == givenValue) {
+            if (!FoundOnce) {
+                FoundOnce = true;
+                prevnode = thisnode;
+                thisnode = thisnode->next;
+            }
+            else {
+                //Delete that node:
+                prevnode->next = thisnode->next;
+                delete thisnode;
+                thisnode = prevnode->next;
+                deleted = true;
+            }
+        }
+        else {
+            prevnode = thisnode;
+            thisnode = thisnode->next;
+        }
+    }
+    return deleted;
 }
 
 template <typename Object>
 void removeAllDuplicates (SingleNode<Object>*& head)
 {
-  
-   
+    SingleNode<Object>* thisnode = head;
+    while (thisnode != nullptr) {
+        removeDuplicates(head, thisnode->data);
+        thisnode = thisnode->next;
+    }
 }
-*/
+
 int main()
 {
     int ary[] = { 11,22,44,77,66,88 }, size = 6;
@@ -165,7 +210,7 @@ int main()
         cout << "Value not Found! \n";
 
  //Bonus
-    /*
+    
     cout<<endl<<"Testing Bonus :\n";
     //Testing insertBefore function
     cout << "\nInserting 33 before 44 :\n";
@@ -208,6 +253,6 @@ cout<<"Adding duplicates:\n";
 
 cout<<"Remove all duplicates:\n";
     removeAllDuplicates(head);
-    printSLL(head);*/
+    printSLL(head);
     return 0;
 }
