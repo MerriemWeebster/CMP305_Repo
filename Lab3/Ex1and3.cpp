@@ -75,8 +75,14 @@ bool eraseSLL(SingleNode<Object>*& head, Object givenValue) {
     SingleNode<Object>* prevnode = head;
     while (thisnode != nullptr) {
         if (thisnode->data == givenValue) {
-            prevnode->next = thisnode->next;
-            delete thisnode;
+            if (thisnode == head) {
+                head = thisnode->next;
+                delete thisnode;
+            }
+            else {
+                prevnode->next = thisnode->next;
+                delete thisnode;
+            }
             return true;
         }
         prevnode = thisnode;
