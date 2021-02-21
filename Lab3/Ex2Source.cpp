@@ -12,7 +12,7 @@ struct SingleNode
 	SingleNode(const Object & d = Object{}, SingleNode * n = nullptr) //constructor initializing data to empty object and 
 		: data{ d }, next{ n } { } //next pointer to null 
 };
-
+/*
 int main()
 {
 	SingleNode<string>* queueHead = nullptr;
@@ -51,3 +51,4 @@ int main()
 	return 0;
 }
 
+*/

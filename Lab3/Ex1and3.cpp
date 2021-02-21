@@ -63,6 +63,7 @@ bool insertAfterSLL(SingleNode<Object>*& head, Object givenValue, Object newValu
             temp->next = newNode;
             return true;
         }
+        temp = temp->next;
     }
     
     return false;
@@ -70,11 +71,22 @@ bool insertAfterSLL(SingleNode<Object>*& head, Object givenValue, Object newValu
 
 template <typename Object>
 bool eraseSLL(SingleNode<Object>*& head, Object givenValue) {
-
-
+    SingleNode<Object>* thisnode = head;
+    SingleNode<Object>* prevnode = head;
+    while (thisnode != nullptr) {
+        if (thisnode->data == givenValue) {
+            prevnode->next = thisnode->next;
+            delete thisnode;
+            return true;
+        }
+        prevnode = thisnode;
+        thisnode = thisnode->next;
+    }
+    return false;
 }
 
 //bonus
+/*
 template <typename Object>
 bool insertBeforeSLL(SingleNode<Object>*& head, Object givenValue, Object newValue)
 {
@@ -94,7 +106,7 @@ void removeAllDuplicates (SingleNode<Object>*& head)
   
    
 }
-
+*/
 int main()
 {
     int ary[] = { 11,22,44,77,66,88 }, size = 6;
@@ -147,6 +159,7 @@ int main()
         cout << "Value not Found! \n";
 
  //Bonus
+    /*
     cout<<endl<<"Testing Bonus :\n";
     //Testing insertBefore function
     cout << "\nInserting 33 before 44 :\n";
@@ -189,6 +202,6 @@ cout<<"Adding duplicates:\n";
 
 cout<<"Remove all duplicates:\n";
     removeAllDuplicates(head);
-    printSLL(head);
+    printSLL(head);*/
     return 0;
 }
