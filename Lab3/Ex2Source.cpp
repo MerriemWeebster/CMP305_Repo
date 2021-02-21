@@ -19,7 +19,7 @@ int main()
 	SingleNode<string>* queueTail = nullptr;
 	cout << "1. Stand in the Queue \n2. Serve a Customer \n3. Print Customer names waiting \n4. Exit \nEnter your choice: ";
 	int choice;
-	string customerName, coursePreReq;
+	string customerName;
 	cin >> choice;
 	while (choice != 4)
 	{
