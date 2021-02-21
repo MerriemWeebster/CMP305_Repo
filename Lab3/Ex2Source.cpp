@@ -44,9 +44,7 @@ int main()
 		else if (choice == 2) //delete
 		{
 		    if(queueHead == nullptr)
-		    {
 		        cout << "Queue Empty\n";
-		    }
 		    else
 		    {
 	       		cout << "Serving " << queueHead->data << endl;
