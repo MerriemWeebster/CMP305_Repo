@@ -1,12 +1,10 @@
-
 #include <iostream>
 #include <string>
 using namespace std;
 
 //defining single node
 template <typename Object>
-struct SingleNode
-{
+struct SingleNode{
     Object  data;
     SingleNode* next;
 
@@ -44,7 +42,12 @@ void printSLL(SingleNode<Object>* head)
 template <typename Object>
 bool findInSLL(SingleNode<Object>* head, Object value)
 {
-    
+    for (SingleNode* ptr = head; ptr != nullptr; ptr = ptr->next) {
+        if (ptr->data == value) {
+            return true;
+        }
+    }
+    return false;
 }
 
 template <typename Object>
@@ -53,7 +56,14 @@ bool insertAfterSLL(SingleNode<Object>*& head, Object givenValue, Object newValu
     SingleNode<Object>* newNode = new SingleNode<Object>(newValue);
     SingleNode<Object>* temp = head;
     //your code
-    
+    while (temp != nullptr) {
+        if (temp->data == givenValue) {
+            //Add the node
+            newNode->next = temp->next;
+            temp->next = newNode;
+            return true;
+        }
+    }
     
     return false;
 }
