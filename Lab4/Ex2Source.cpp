@@ -93,7 +93,7 @@ void addSong(DoubleNode<Object>*& node, Object newEntry) {
 }
 
 template <typename Object>
-bool findSong(DoubleNode<Object>* head, Object value, DoubleNode<Object> &returnPtr)
+bool findSong(DoubleNode<Object>* head, Object value, DoubleNode<Object>*& returnPtr)
 {
     while (head != nullptr) 
 	{
