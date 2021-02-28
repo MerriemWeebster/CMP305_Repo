@@ -66,8 +66,7 @@ bool findInDLL(DoubleNode<Object>*  head, Object value)
 template <typename Object>
 bool insertBeforeDLL(DoubleNode<Object>* & head, Object givenValue, Object newValue) {
     
-    DoubleNode<Object>* newnode;
-    newnode->data = newValue;
+    DoubleNode<Object>* newnode= new DoubleNode<Object>(newValue);
     DoubleNode<Object>* thisnode = head;
     while (thisnode != nullptr) {
         if (thisnode->data == givenValue) {
@@ -93,22 +92,26 @@ bool insertBeforeDLL(DoubleNode<Object>* & head, Object givenValue, Object newVa
 }
 template <typename Object>
 bool eraseInDLL(DoubleNode<Object>*& head, Object givenValue) {
-    DoubleNode<Object>thisnode = head;
+    DoubleNode<Object>* thisnode = head;
     while (thisnode != nullptr) {
-        if (thisnode->data = givenValue) {
+        if (thisnode->data == givenValue) {
             if (thisnode == head) {
                 thisnode->next->prev = nullptr;
                 head = thisnode->next;
                 thisnode->next = nullptr;
                 delete thisnode;
+                return true;
             }
             else {
                 thisnode->next->prev = thisnode->prev;
                 thisnode->prev->next = thisnode->next;
+                delete thisnode;
+                return true;
             }
         }
         thisnode = thisnode->next;
     }
+    return false;
 }
 /*
 //Bonus
