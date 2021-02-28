@@ -52,28 +52,36 @@ void printDLL(DoubleNode<Object>*  head)
 
 template <typename Object>
 bool eraseInDLL(DoubleNode<Object>*& head, Object givenValue) {
-	//copy ex1 code of eraseInDLL function here 
 	DoubleNode<Object>* thisnode = head;
-    while (thisnode != nullptr) {
-        if (thisnode->data == givenValue) {
-            if (thisnode == head) {
-                thisnode->next->prev = nullptr;
-                head = thisnode->next;
-                thisnode->next = nullptr;
-                delete thisnode;
-                return true;
-            }
-            else {
-                thisnode->next->prev = thisnode->prev;
-                thisnode->prev->next = thisnode->next;
-                delete thisnode;
-                return true;
-            }
-        }
-        thisnode = thisnode->next;
-    }
-    return false;
+	while (thisnode != nullptr) {
+		if (thisnode->data == givenValue) {
+			if (thisnode == head) {
+				thisnode->next->prev = nullptr;
+				head = thisnode->next;
+				thisnode->next = nullptr;
+				delete thisnode;
+				return true;
+			}
+			else {
+				if (thisnode->next == nullptr) {
+					thisnode->prev->next = nullptr;
+					delete thisnode;
+					return true;
+				}
+				else {
+					thisnode->next->prev = thisnode->prev;
+					thisnode->prev->next = thisnode->next;
+					delete thisnode;
+					return true;
+				}
+
+			}
+		}
+		thisnode = thisnode->next;
+	}
+	return false;
 }
+
 //add a song at the end of the list  
 template <typename Object>
 void addSong(DoubleNode<Object>*& node, Object newEntry) {
@@ -86,6 +94,8 @@ void addSong(DoubleNode<Object>*& node, Object newEntry) {
             DoubleNode<Object> *newNode = new DoubleNode<Object>(newEntry);
 			newNode->prev = thisnode;
 			thisnode->next = newNode;
+			newNode->next = nullptr;
+			break;
         }
 		else
 			thisnode = thisnode->next;
@@ -109,7 +119,7 @@ bool findSong(DoubleNode<Object>* head, Object value, DoubleNode<Object>*& retur
 }
 
 void menu() {
-	cout << "1. Add a Song\n"
+	cout << "\n\n1. Add a Song\n"
 		<<"2. Delete a Song\n"
 		<<"3. Play a Song\n"
 		<<"4. Forward\n"

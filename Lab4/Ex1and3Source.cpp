@@ -222,7 +222,6 @@ DoubleNode<Object>* setIntersection(DoubleNode<Object>*  head1, DoubleNode<Objec
     return anshead;
 }
 
-
 int main()
 {
     int ary[] = { 1,2,4,7,6,8 }, size = 6;
@@ -306,5 +305,3 @@ int main()
     printDLL(bonusIntersection);
     return 0;
 }
-
-
