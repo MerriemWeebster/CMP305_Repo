@@ -53,11 +53,59 @@ void printDLL(DoubleNode<Object>*  head)
 template <typename Object>
 bool eraseInDLL(DoubleNode<Object>*& head, Object givenValue) {
 	//copy ex1 code of eraseInDLL function here 
+	DoubleNode<Object>* thisnode = head;
+    while (thisnode != nullptr) {
+        if (thisnode->data == givenValue) {
+            if (thisnode == head) {
+                thisnode->next->prev = nullptr;
+                head = thisnode->next;
+                thisnode->next = nullptr;
+                delete thisnode;
+                return true;
+            }
+            else {
+                thisnode->next->prev = thisnode->prev;
+                thisnode->prev->next = thisnode->next;
+                delete thisnode;
+                return true;
+            }
+        }
+        thisnode = thisnode->next;
+    }
+    return false;
 }
 //add a song at the end of the list  
 template <typename Object>
 void addSong(DoubleNode<Object>*& node, Object newEntry) {
 	//your code goes here
+	DoubleNode<Object>* thisnode = node;
+    while (thisnode != nullptr) 
+	{
+        if (thisnode->next == nullptr) 
+		{
+            DoubleNode<Object> *newNode = new DoubleNode<Object>(newEntry);
+			newNode->prev = thisnode;
+			thisnode->next = newNode;
+        }
+		else
+			thisnode = thisnode->next;
+    }
+}
+
+template <typename Object>
+bool findSong(DoubleNode<Object>* head, Object value, DoubleNode<Object> &returnPtr)
+{
+    while (head != nullptr) 
+	{
+        if (head->data == value) 
+		{
+            returnPtr = head;
+			return true;
+        }
+        head = head->next;
+    }
+	
+	return false;
 }
 
 void menu() {
@@ -87,9 +135,9 @@ int main()
 	MusicList[3] = d;
 	DoubleNode<Song> *MusicPlayList = createDoublyLinkedList(MusicList, 4);
 	
-		DoubleNode<Song> *currentSong = MusicPlayList
+	DoubleNode<Song> *currentSong = MusicPlayList;
 	Song song;
-	bool found = false;
+	//bool found = false; Using custom function instead (findSong)
 	int option;
 	do {
 		menu();
@@ -109,6 +157,8 @@ int main()
 			song.setSinger(singer);
 			//your code goes here
 
+			//Use currentSong instead of head as currentSong is always closer to the tail of the list in comparison to the head
+			addSong(currentSong, song);
 			cout << endl;
 			break;
 		case 2: // Delete a Song
@@ -121,7 +171,7 @@ int main()
 			song.setTitle(title);
 			song.setSinger(singer);
 			//your code goes here
-
+			eraseInDLL(MusicPlayList, song);
 			break;
 		case 3: // Paly a Song
 			cout << "Enter the title of the song to play: ";
@@ -133,15 +183,38 @@ int main()
 			song.setSinger(singer);
 						
 			//your code goes here
-
+			if(findSong(MusicPlayList, song, currentSong))
+				cout << "Now playing " << song.getTitle() << " by " << song.getSinger();
+			else
+				cout << "Song not found!"; 
 
 			break;
 		case 4: //forward
 			//your code goes here
 
+			if(currentSong->next != nullptr)
+				currentSong = currentSong->next;
+			else
+				currentSong = MusicPlayList;
+
+			song = currentSong->data;
+			cout << "Now playing " << song.getTitle() << " by " << song.getSinger();
 			break;
 		case 5: //backward
 			//your code goes here
+
+			if(currentSong->prev != nullptr)
+				currentSong = currentSong->prev;
+			else
+			{
+				while(currentSong->next != nullptr)
+				{
+					currentSong = currentSong->next;
+				}
+			}
+
+			song = currentSong->data;
+			cout << "Now playing " << song.getTitle() << " by " << song.getSinger();
 
 			break;
 		case 6: //Display Playlist
