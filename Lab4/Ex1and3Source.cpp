@@ -60,6 +60,7 @@ bool findInDLL(DoubleNode<Object>*  head, Object value)
         }
         head = head->next;
     }
+    return false;
 }
 
 
@@ -113,28 +114,115 @@ bool eraseInDLL(DoubleNode<Object>*& head, Object givenValue) {
     }
     return false;
 }
-/*
+
 //Bonus
 template <typename Object>
 bool setInsert(DoubleNode<Object>* & head, Object newValue)
 {
-    
-  
+    if (findInDLL(head, newValue)) {
+        return false;
+    }
+    else {
+        if (head == nullptr) {
+            DoubleNode<Object>* newnode = new DoubleNode<Object>(newValue);
+            head = newnode;
+            newnode->next = nullptr;
+            newnode->prev = nullptr;
+            return true;
+        }
+
+        //Insert the new node!
+        DoubleNode<Object>* thisnode = head;
+        while(thisnode->next != nullptr) {
+            thisnode = thisnode->next;
+        } 
+        //Now thisnode points to the last node in the list
+        DoubleNode<Object>* newnode = new DoubleNode<Object>(newValue);
+        thisnode->next = newnode;
+        newnode->next = nullptr;
+        newnode->prev = thisnode;
+        return true;
+    }
 }
 
 template <typename Object>
 DoubleNode<Object>* setUnion(DoubleNode<Object>*  head1, DoubleNode<Object>*  head2)
-{
-    
+{   
+    DoubleNode<Object>* anshead = new DoubleNode<Object>(head1->data);
+    DoubleNode<Object>* anstail = anshead;
+    //append whole of list1, and then output the elements in list2 that are not in list1
+    //list 1 output:
+    DoubleNode<Object>* thisnode = head1->next;
+    while (thisnode != nullptr) {
+        //insert into answer list
+        DoubleNode<Object>* temp = new DoubleNode<Object>(thisnode->data);
+        anstail->next = temp;
+        temp->next = nullptr;
+        temp->prev = anstail;
+        anstail = temp;
+        thisnode = thisnode->next;
+    }
+
+    //Output list2 elements not in list1:
+    thisnode = head2;
+    while (thisnode != nullptr) {
+        //search list1 for this element:
+        bool found = false;
+        DoubleNode<Object>* innerptr = head1;
+        while (innerptr != nullptr) {
+            if (thisnode->data == innerptr->data) {
+                //cout << thisnode->data << " ";
+                found = true;
+                break;
+            }
+            innerptr = innerptr->next;
+        }
+
+        if (!(found)) {
+            //insert into answer list:
+            DoubleNode<Object>* temp = new DoubleNode<Object>(thisnode->data);
+            anstail->next = temp;
+            temp->next = nullptr;
+            temp->prev = anstail;
+            anstail = temp;
+        }
+        thisnode = thisnode->next;
+    }
+    return anshead;
 }
 
 template <typename Object>
 DoubleNode<Object>* setIntersection(DoubleNode<Object>*  head1, DoubleNode<Object>*  head2)
 {
-   
+    DoubleNode<Object>* anshead = new DoubleNode<Object>(head1->data);
+    DoubleNode<Object>* anstail = anshead;
+
+    DoubleNode<Object>* thisnode = head2->next;
+    while (thisnode != nullptr) {
+        
+        //search list1 for this element:
+        bool found = false;
+        DoubleNode<Object>* innerptr = head1;
+        while (innerptr != nullptr) {
+            if (thisnode->data == innerptr->data) {
+                found = true;
+                break;
+            }
+            innerptr = innerptr->next;
+        }
+        if (found) {
+            DoubleNode<Object>* temp = new DoubleNode<Object>(thisnode->data);
+            anstail->next = temp;
+            temp->next = nullptr;
+            temp->prev = anstail;
+            anstail = temp;
+        }
+        thisnode = thisnode->next;
+    }
+    return anshead;
 }
 
-*/
+
 int main()
 {
     int ary[] = { 1,2,4,7,6,8 }, size = 6;
@@ -189,7 +277,7 @@ int main()
         printDLL(head);
     else
         cout << "Value not Found! \n";
-   /*
+   
    //Bonus
     cout<<"\n\n Testing Bonus \n";
     DoubleNode<int>* bonushead1=nullptr;
@@ -199,7 +287,7 @@ int main()
     setInsert(bonushead1,4);
     setInsert(bonushead1,5);
     setInsert(bonushead1,3);
-   // printDLL(bonushead1);
+    printDLL(bonushead1);
     DoubleNode<int>* bonushead2=nullptr;
     setInsert(bonushead2,2);
     setInsert(bonushead2,3);
@@ -212,10 +300,10 @@ int main()
     printDLL(bonushead2);
     cout<<"Testing Union: \n";
     DoubleNode<int>* bonusUnionhead = setUnion(bonushead1, bonushead2);
-   printDLL(bonusUnionhead);
+    printDLL(bonusUnionhead);
     cout<<"Testing Intersection: \n";
     DoubleNode<int>* bonusIntersection= setIntersection(bonushead1, bonushead2);
-    printDLL(bonusIntersection);*/
+    printDLL(bonusIntersection);
     return 0;
 }
 
