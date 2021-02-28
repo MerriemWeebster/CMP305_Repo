@@ -54,21 +54,63 @@ void printDLL(DoubleNode<Object>*  head)
 template <typename Object>
 bool findInDLL(DoubleNode<Object>*  head, Object value)
 {
-    
+    while (head != nullptr) {
+        if (head->data == value) {
+            return true;
+        }
+        head = head->next;
+    }
 }
 
 
 template <typename Object>
 bool insertBeforeDLL(DoubleNode<Object>* & head, Object givenValue, Object newValue) {
     
-   
-  
+    DoubleNode<Object>* newnode;
+    newnode->data = newValue;
+    DoubleNode<Object>* thisnode = head;
+    while (thisnode != nullptr) {
+        if (thisnode->data == givenValue) {
+            //Insert the node before it:
+            if (thisnode == head) {
+                newnode->next = thisnode;
+                newnode->prev = thisnode->prev;
+                head = newnode;
+                thisnode->prev = newnode;
+                return true;
+            }
+            else {
+                newnode->next = thisnode;
+                newnode->prev = thisnode->prev;
+                thisnode->prev->next = newnode;
+                thisnode->prev = newnode;
+                return true;
+            }
+        }
+        thisnode = thisnode->next;
+    }
+    return false;  
 }
 template <typename Object>
 bool eraseInDLL(DoubleNode<Object>*& head, Object givenValue) {
-   
+    DoubleNode<Object>thisnode = head;
+    while (thisnode != nullptr) {
+        if (thisnode->data = givenValue) {
+            if (thisnode == head) {
+                thisnode->next->prev = nullptr;
+                head = thisnode->next;
+                thisnode->next = nullptr;
+                delete thisnode;
+            }
+            else {
+                thisnode->next->prev = thisnode->prev;
+                thisnode->prev->next = thisnode->next;
+            }
+        }
+        thisnode = thisnode->next;
+    }
 }
-
+/*
 //Bonus
 template <typename Object>
 bool setInsert(DoubleNode<Object>* & head, Object newValue)
@@ -89,7 +131,7 @@ DoubleNode<Object>* setIntersection(DoubleNode<Object>*  head1, DoubleNode<Objec
    
 }
 
-
+*/
 int main()
 {
     int ary[] = { 1,2,4,7,6,8 }, size = 6;
@@ -144,7 +186,7 @@ int main()
         printDLL(head);
     else
         cout << "Value not Found! \n";
-   
+   /*
    //Bonus
     cout<<"\n\n Testing Bonus \n";
     DoubleNode<int>* bonushead1=nullptr;
@@ -170,7 +212,7 @@ int main()
    printDLL(bonusUnionhead);
     cout<<"Testing Intersection: \n";
     DoubleNode<int>* bonusIntersection= setIntersection(bonushead1, bonushead2);
-    printDLL(bonusIntersection);
+    printDLL(bonusIntersection);*/
     return 0;
 }
 
