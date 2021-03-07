@@ -19,7 +19,14 @@ int main() {
 	for (auto i = arr1.begin(); i != arr1.end(); i++) { cout << *i << " "; }
 	cout << endl << "Array 2 contains:" << endl;
 	for (auto i = arr2.begin(); i != arr2.end(); i++) { cout << *i << " "; }
-	cout << endl;
+	
+	SortedClass<int>* inter = intersection(arr1, arr2);
+	cout << endl << "Array 2 contains:" << endl;
+	for (auto i = arr2.begin(); i != arr2.end(); i++) { cout << *i << " "; }
+
+	SortedClass<int>* uni = Union(arr1, arr2);
+	cout << endl << "Array 2 contains:" << endl;
+	for (auto i = arr2.begin(); i != arr2.end(); i++) { cout << *i << " "; }
 
 
 	return 0;

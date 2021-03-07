@@ -63,8 +63,8 @@ List<Object>::iterator insert(const Object&  x)
 	{
 		SortedClass<Object>* result = new SortedClass<Object>;
 		
-		SortedClass<Object> itr1 = list1.begin();
-		SortedClass<Object> itr2 = list2.begin();
+		List<Object> itr1 = list1.begin();
+		List<Object> itr2 = list2.begin();
 
 		while(itr1 != list1.end() && itr2 != list2.end())
 		{
@@ -90,8 +90,8 @@ List<Object>::iterator insert(const Object&  x)
 	{
 		SortedClass<Object>* result = new SortedClass<Object>;
 		
-		SortedClass<Object> itr1 = list1.begin();
-		SortedClass<Object> itr2 = list2.begin();
+		List<Object> itr1 = list1.begin();
+		List<Object> itr2 = list2.begin();
 
 		while(true)
 		{
