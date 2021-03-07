@@ -4,19 +4,23 @@ using namespace std;
 
 int main() {
 
-	SortedClass<int> arr;
-	for (int i = 1; i <= 5; i++) {
-		arr.insert(i);
+	SortedClass<int> arr1; // 1,2,3,5,7,9
+	SortedClass<int> arr2; // 1,2,3,4,6,8,10
+
+	int arr1ele[6] = { 1,2,3,5,7,9 };
+	int arr2ele[7] = { 1,2,3,4,6,8,10 };
+	for (int x : arr1ele) {
+		arr1.insert(x);
 	}
-	arr.insert(7);
-	arr.insert(6);// Insert in the middle
-	arr.insert(0);// Insert at the start
-	for (auto i = arr.begin(); i != arr.end(); i++) {
-		cout << *i << " ";
+	for (int x : arr2ele) {
+		arr2.insert(x);
 	}
+	cout << "Array 1 contains:" << endl;
+	for (auto i = arr1.begin(); i != arr1.end(); i++) { cout << *i << " "; }
+	cout << endl << "Array 2 contains:" << endl;
+	for (auto i = arr2.begin(); i != arr2.end(); i++) { cout << *i << " "; }
 	cout << endl;
-	arr.erase(4);
-	for (auto i = arr.begin(); i != arr.end(); i++) {	cout << *i << " "; }
+
 
 	return 0;
 }

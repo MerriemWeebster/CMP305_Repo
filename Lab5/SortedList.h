@@ -6,8 +6,7 @@ template <typename Object>
 class SortedClass : public List<Object> {
 
 public:
-
-	List<Object>::iterator insert(const Object&  x)
+List<Object>::iterator insert(const Object&  x)
 	{
 		typename List<Object>::iterator itr = List<Object>::begin();
 
@@ -40,12 +39,12 @@ public:
 	List<Object>::iterator insert(List<Object>::iterator itr, const Object & x)
 	{
 		if (itr == List<Object>::begin()){ //insert at first node
-			if (x < ++itr) {
+			if (x < *(++itr)) {
 				List<Object>::insert(itr, x);
 				return --itr;
 			}
 			else {
-				throw SortedOrderMismatchException;
+				throw SortedOrderMismatchException{};
 			}
 		}
 		else if (x > *(--itr) && x <= *(++itr)) {//insert at any other node
@@ -53,9 +52,10 @@ public:
 			return --itr;
 	   }
 		else {
-			throw SortedOrderMismatchException;
+			throw SortedOrderMismatchException{};
 		}
 	}
+	
 
 
 	friend SortedClass<Object>* intersection(const SortedClass<Object>& list1,
