@@ -74,7 +74,7 @@ List<Object>::iterator insert(const Object&  x)
 				itr2++;
 			else
 			{
-				result.insert(*itr1);
+				result->push_front(*itr1);
 				result++; 
 				itr1++; 
 				itr2++;
@@ -109,17 +109,17 @@ List<Object>::iterator insert(const Object&  x)
 
 			if(*itr1 < *itr2)
 			{
-				result.insert(*itr1);
+				result->push_front(*itr1);
 				itr1++;
 			}
 			else if(*itr1 > *itr2)
 			{
-				result.insert(*itr2);
+				result->push_front(*itr2);
 				itr2++;
 			}
 			else
 			{
-				result.insert(*itr1);
+				result->push_front(*itr1);
 				itr1++;
 				itr2++;
 			}
