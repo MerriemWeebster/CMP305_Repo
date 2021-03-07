@@ -74,7 +74,7 @@ public:
 				itr2++;
 			else
 			{
-				*result = *itr1;
+				result.insert(*itr1);
 				result++; 
 				itr1++; 
 				itr2++;
@@ -109,17 +109,17 @@ public:
 
 			if(*itr1 < *itr2)
 			{
-				*result = *itr1;
+				result.insert(*itr1);
 				itr1++;
 			}
 			else if(*itr1 > *itr2)
 			{
-				*result = *itr2;
+				result.insert(*itr2);
 				itr2++;
 			}
 			else
 			{
-				*result = *itr1;
+				result.insert(*itr1);
 				itr1++;
 				itr2++;
 			}
