@@ -17,13 +17,7 @@ public:
 		//Now we have found the node bigger than x. 
 		//X needs to be inserted behind that node.
 		List<Object>::insert(itr, x);
-		if (itr == List<Object>::end()) {
-			return itr;
-		}
-		else {
-			return ++itr;
-		}
-
+		return --itr;
 	}
 	List<Object>::iterator erase(const Object & x)
 	{
@@ -35,6 +29,12 @@ public:
 		//Now we have found the node bigger than x. 
 		//X needs to be inserted behind that node.
 		List<Object>::erase(itr);
+		if (itr == List<Object>::end()) {
+			return itr;
+		}
+		else {
+			return ++itr;
+		}
 	}
 	
 	List<Object>::iterator insert(List<Object>::iterator itr, const Object & x)
