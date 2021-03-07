@@ -79,9 +79,7 @@ List<Object>::iterator insert(const Object&  x)
 				itr2++;
 			}
 		}
-		
 		return result;	
-
 	}
 
 	friend SortedClass<Object>* Union(const SortedClass<Object>& list1,
