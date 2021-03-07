@@ -14,6 +14,7 @@ int main() {
 	for (auto i = arr.begin(); i != arr.end(); i++) {
 		cout << *i << " ";
 	}
+	cout << endl;
 	arr.erase(4);
 	for (auto i = arr.begin(); i != arr.end(); i++) {	cout << *i << " "; }
 
