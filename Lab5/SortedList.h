@@ -12,7 +12,7 @@ public:
 		typename List<Object>::iterator itr = List<Object>::begin();
 
 		while (itr != List<Object>::end() && *itr < x) {
-			itr=++itr;
+			++itr;
 		}
 		//Now we have found the node bigger than x. 
 		//X needs to be inserted behind that node.
@@ -24,7 +24,7 @@ public:
 		typename List<Object>::iterator itr = List<Object>::begin();
 
 		while (itr != List<Object>::end() && *itr < x) {
-			itr++;
+			++itr;
 		}
 		//Now we have found the node bigger than x. 
 		//X needs to be inserted behind that node.
