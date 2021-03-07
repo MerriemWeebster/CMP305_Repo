@@ -63,8 +63,8 @@ List<Object>::iterator insert(const Object&  x)
 	{
 		SortedClass<Object>* result = new SortedClass<Object>;
 		
-		List<Object> itr1 = list1.begin();
-		List<Object> itr2 = list2.begin();
+		typename List<Object>::const_iterator itr1 = list1.begin();
+		typename List<Object>::const_iterator itr2 = list2.begin();
 
 		while(itr1 != list1.end() && itr2 != list2.end())
 		{
@@ -90,20 +90,20 @@ List<Object>::iterator insert(const Object&  x)
 	{
 		SortedClass<Object>* result = new SortedClass<Object>;
 		
-		List<Object> itr1 = list1.begin();
-		List<Object> itr2 = list2.begin();
+		typename List<Object>::const_iterator itr1 = list1.begin();
+		typename List<Object>::const_iterator itr2 = list2.begin();
 
 		while(true)
 		{
 			if(itr1 == list1.end())
 			{
-				std::copy(itr2, itr2.end(), result);
+				std::copy(itr2, list2.end(), result);
 				return result;
 			}
 
 			if(itr2 == list2.end())
 			{
-				std::copy(itr1, itr1.end(), result);
+				std::copy(itr1, list1.end(), result);
 				return result;
 			}
 
