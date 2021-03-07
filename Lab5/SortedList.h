@@ -72,9 +72,8 @@ List<Object>::iterator insert(const Object&  x)
 			else if(*itr1 > *itr2)
 				itr2++;
 			else{
-				cout << endl << *itr1;   // DEBUGGING PURPOSES
+				
 				result->push_back(*itr1);
-				//result++;
 				itr1++;
 				itr2++;
 			}
@@ -108,8 +107,20 @@ List<Object>::iterator insert(const Object&  x)
 				itr1++;
 				itr2++;
 			}
+		}
+		// To handle the possiblity that one of the lists may be lnoger than the other
+		if (itr1 == list1.end() && itr2 != list2.end()){
+			while (itr2 != list2.end()){
+				result->push_back(*itr2);
+				itr2++;
+			}
+		}
 
-			result++;
+		if (itr1 != list1.end() && itr2 == list2.end()){
+			while (itr1 != list1.end()){
+				result->push_back(*itr1);
+				itr1++;
+			}
 		}
 		return result;
 	}
