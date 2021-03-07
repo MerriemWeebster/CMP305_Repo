@@ -69,7 +69,9 @@ public:
 			else
 			{
 				*result = *itr1;
-				++result; ++itr1; ++itr2;
+				result++; 
+				itr1++; 
+				itr2++;
 			}
 		}
 		
