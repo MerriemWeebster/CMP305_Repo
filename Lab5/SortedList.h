@@ -66,17 +66,16 @@ List<Object>::iterator insert(const Object&  x)
 		typename List<Object>::const_iterator itr1 = list1.begin();
 		typename List<Object>::const_iterator itr2 = list2.begin();
 
-		while(itr1 != list1.end() && itr2 != list2.end())
-		{
+		while(itr1 != list1.end() || itr2 != list2.end()){
 			if(*itr1 < *itr2)
 				itr1++;
 			else if(*itr1 > *itr2)
 				itr2++;
-			else
-			{
-				result->push_front(*itr1);
-				result++; 
-				itr1++; 
+			else{
+				cout << endl << *itr1;   // DEBUGGING PURPOSES
+				result->push_back(*itr1);
+				result++;
+				itr1++;
 				itr2++;
 			}
 		}
@@ -93,39 +92,28 @@ List<Object>::iterator insert(const Object&  x)
 		typename List<Object>::const_iterator itr1 = list1.begin();
 		typename List<Object>::const_iterator itr2 = list2.begin();
 
-		while(true)
+		while(itr1!=list1.end() || itr2!=list2.end())
 		{
-			if(itr1 == list1.end())
-			{
-				std::copy(itr2, list2.end(), result);
-				return result;
-			}
-
-			if(itr2 == list2.end())
-			{
-				std::copy(itr1, list1.end(), result);
-				return result;
-			}
-
 			if(*itr1 < *itr2)
 			{
-				result->push_front(*itr1);
+				result->push_back(*itr1);
 				itr1++;
 			}
 			else if(*itr1 > *itr2)
 			{
-				result->push_front(*itr2);
+				result->push_back(*itr2);
 				itr2++;
 			}
 			else
 			{
-				result->push_front(*itr1);
+				result->push_back(*itr1);
 				itr1++;
 				itr2++;
 			}
 
 			result++;
 		}
+		return result;
 	}
 
 };
