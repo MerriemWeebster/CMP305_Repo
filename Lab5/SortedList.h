@@ -81,9 +81,43 @@ public:
 		const SortedClass<Object> & list2)
 	{
 		SortedClass<Object>* result = new SortedClass<Object>;
-		//your code
+		
+		SortedClass<Object> itr1 = list1.begin();
+		SortedClass<Object> itr2 = list2.begin();
 
-		return result;
+		while(true)
+		{
+			if(itr1 == list1.end())
+			{
+				std::copy(itr2, itr2.end(), result);
+				return result;
+			}
+
+			if(itr2 == list2.end())
+			{
+				std::copy(itr1, itr1.end(), result);
+				return result;
+			}
+
+			if(*itr1 < *itr2)
+			{
+				*result = *itr1;
+				itr1++;
+			}
+			else if(*itr1 > *itr2)
+			{
+				*result = *itr2;
+				itr2++;
+			}
+			else
+			{
+				*result = *itr1;
+				itr1++;
+				itr2++;
+			}
+
+			result++;
+		}
 	}
 
 };
