@@ -57,7 +57,23 @@ public:
 	{
 		SortedClass<Object>* result = new SortedClass<Object>;
 		
-		//your code
+		SortedClass<Object> itr1 = list1.begin();
+		SortedClass<Object> itr2 = list2.begin();
+
+		while(itr1 != list1.end() && itr2 != list2.end())
+		{
+			if(*itr1 < *itr2)
+				itr1++;
+			else if(*itr1 > *itr2)
+				itr2++;
+			else
+			{
+				*result = *itr1;
+				++result; ++itr1; ++itr2;
+			}
+		}
+		
+		return result;	
 
 	}
 
