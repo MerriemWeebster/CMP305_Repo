@@ -62,15 +62,77 @@ private:
 	int id, noOfElders, noOfKids;
 };
 
-queue<Family> KidsQueue(queue<Family> &a, queue<Family> &b) {
-	 
-            
-    
+queue<Family> KidsQueue(queue<Family> &a, queue<Family> &b) 
+{
+	queue<Family> tmpA = a, tmpB = b, c;
+
+	a = b = c;
+
+	while (!tmpA.empty() && !tmpB.empty()) 
+	{
+		if(!tmpA.empty())
+		{
+			Family fObj = tmpA.front();
+
+			if(fObj.getnoOfkids() >= 3)
+				c.push(fObj);
+			else
+				a.push(fObj);
+
+			tmpA.pop();
+		}
+
+		if(!tmpB.empty())
+		{
+			Family fObj = tmpB.front();
+
+			if(fObj.getnoOfkids() >= 3)
+				c.push(fObj);
+			else
+				b.push(fObj);
+
+			tmpB.pop();
+		}
+	}
+
+	return c;
 }
 
 queue <Family> ReOrganize(queue<Family>& a, queue<Family>& b)
 {
-    
+	int cutoff = ((a.size() + b.size()) / 3) / 2;
+    queue<Family> tmpA = a, tmpB = b, c;
+
+	a = b = c;
+
+	while (!tmpA.empty() && !tmpB.empty()) 
+	{
+		if(!tmpA.empty())
+		{
+			Family fObj = tmpA.front();
+
+			if(tmpA.size() <= cutoff)
+				c.push(fObj);
+			else
+				a.push(fObj);
+
+			tmpA.pop();
+		}
+
+		if(!tmpB.empty())
+		{
+			Family fObj = tmpB.front();
+
+			if(tmpB.size() <= cutoff)
+				c.push(fObj);
+			else
+				b.push(fObj);
+
+			tmpB.pop();
+		}
+	}
+
+	return c;
 }
 //print Queue
 ostream &operator<<(ostream &out, const queue<Family> &q) {
@@ -93,7 +155,7 @@ int main() {
 	counter1.push(Family(200, 2));
 	counter1.push(Family(400, 1));
 	counter1.push(Family(402, 1,4));
-	//counter1.push(Family(789, 2));
+	counter1.push(Family(789, 2));
 	
 	counter2.push(Family(300, 2, 1));
 	counter2.push(Family(500, 1, 3));
@@ -102,25 +164,22 @@ int main() {
 	counter2.push(Family(567, 2));
 	
 
-    /*counter3 = KidsQueue(counter1, counter2);
+    cout << "Kids Queue\n\n";
+
+    counter3 = KidsQueue(counter1, counter2);
     
     cout << "Counter 3 has: " << endl << counter3;
-    cout << "Counter 1 after modification has: \n" << counter1;
-    cout << "Counter 2 after modification has: " << endl << counter2;
+    cout << "Counter 1 after modification has: \n\n" << counter1;
+    cout << "Counter 2 after modification has: \n\n" << endl << counter2;
 
-*/
+    cout << "ReOrganize Queue\n\n";
+
 	counter3 = ReOrganize(counter1, counter2);
 
 	cout << "Counter 1 has: " << endl << counter1;
-	cout << "Counter 2 after modification has: \n" << counter2;
-	cout << "Counter 3 after modification has: " << endl << counter3;
+	cout << "Counter 2 after modification has: \n\n" << counter2;
+	cout << "Counter 3 after modification has: \n\n" << endl << counter3;
 	
 	
 	return 0;
 }
-
-
-
-
-
-
