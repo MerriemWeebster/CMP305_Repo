@@ -3,7 +3,7 @@
 #include<stack>
 #include<string>
 using namespace std;
-
+/*
 int main() {
 	stack<char> mystack;
 	string path="C:/Users/rohan/Desktop/AUS Year 2/Sem 4/Data Structures and Algorithms/Labs/CMP305_Repo/Lab6/";
@@ -58,4 +58,4 @@ int main() {
 		cout << "All good !" << endl;
 	}
 	return 0;
-}
+}*/

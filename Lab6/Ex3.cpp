@@ -1,3 +1,4 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include<iostream>
 #include <stack>
 #include <string>
@@ -21,15 +22,39 @@ int main() {
     cin.getline(pstfix,80);
 
     char * pch;
-    cout << "Splitting string "<< pstfix << "  into tokens: "<<endl;
+    cout << "Splitting string "<< pstfix << "  into tokens and computing your answer... "<<endl;
     pch = strtok (pstfix ," ");
     while (pch != NULL)
     {
-        
-        cout<<pch<<endl;
+        if (isInteger(pch)) {
+            stack.push((int)*pch - 48);
+        }
+        else {
+            int a, b;
+            a = stack.top();
+            stack.pop();
+            b = stack.top();
+            stack.pop();
+
+            switch (*pch) {
+                case '+':
+                    stack.push(b + a);
+                    break;
+                case '-':
+                    stack.push(b - a);
+                    break;
+                case '*':
+                    stack.push(b * a);
+                    break;
+                case '/':
+                    stack.push(b / a);
+                    break;
+            }
+            
+        }
 
         pch = strtok (NULL, " ");
     }
+    cout << "The expression evaluates to: "<< stack.top();
     return 0;
 }
-
