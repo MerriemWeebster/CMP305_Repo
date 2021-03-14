@@ -1,0 +1,10 @@
+int main()
+{
+	int n = 2345;
+	int num;
+	do
+	{
+		cin >> n;
+	} while ( (n < 0) || (n>9999);
+	   	
+}
