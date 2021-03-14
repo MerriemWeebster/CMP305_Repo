@@ -64,7 +64,10 @@ private:
 
 queue<Family> KidsQueue(queue<Family> &a, queue<Family> &b) 
 {
-	queue<Family> tmpA = a, tmpB = b, newA, newB, c;
+	queue<Family> tmpA = a, tmpB = b, c;
+
+	a = b = c;
+
 	while (!tmpA.empty() && !tmpB.empty()) 
 	{
 		if(!tmpA.empty())
@@ -74,7 +77,7 @@ queue<Family> KidsQueue(queue<Family> &a, queue<Family> &b)
 			if(fObj.getnoOfkids() >= 3)
 				c.push(fObj);
 			else
-				newA.push(fObj);
+				a.push(fObj);
 
 			tmpA.pop();
 		}
@@ -86,14 +89,11 @@ queue<Family> KidsQueue(queue<Family> &a, queue<Family> &b)
 			if(fObj.getnoOfkids() >= 3)
 				c.push(fObj);
 			else
-				newB.push(fObj);
+				b.push(fObj);
 
 			tmpB.pop();
 		}
 	}
-            
-    a = newA;
-	b = newB;
 
 	return c;
 }
