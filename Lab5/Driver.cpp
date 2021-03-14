@@ -7,7 +7,7 @@ int main() {
 	SortedClass<int> arr1; // 1,2,3,5,7,9
 	SortedClass<int> arr2; // 1,2,3,4,6,8,10
 
-	int arr1ele[6] = { 1,2,3,5,7,9 };
+	int arr1ele[7] = { -1,0,1,3,5,7,9 };
 	int arr2ele[7] = { 1,2,3,4,6,8,10 };
 	for (int x : arr1ele) {
 		arr1.insert(x);
@@ -20,6 +20,15 @@ int main() {
 	cout << endl << "Array 2 contains:" << endl;
 	for (auto i = arr2.begin(); i != arr2.end(); i++) { cout << *i << " "; }
 	
+	cout << endl << "Inserting 2 before 1:" << endl;
+	try {
+		arr1.insert(++(++arr1.begin()), 2);
+	}
+	catch (SortedOrderMismatchException) {
+		cout << "Invalid location!!" << endl;
+	}
+	for (auto i = arr1.begin(); i != arr1.end(); i++) { cout << *i << " "; }
+
 
 	SortedClass<int>* inter = intersection(arr1, arr2);
 	cout << endl << "Intersection contains:" << endl;
