@@ -62,10 +62,40 @@ private:
 	int id, noOfElders, noOfKids;
 };
 
-queue<Family> KidsQueue(queue<Family> &a, queue<Family> &b) {
-	 
+queue<Family> KidsQueue(queue<Family> &a, queue<Family> &b) 
+{
+	queue<Family> tmpA = a, tmpB = b, newA, newB, c;
+	while (!tmpA.empty() && !tmpB.empty()) 
+	{
+		if(!tmpA.empty())
+		{
+			Family fObj = tmpA.front();
+
+			if(fObj.getnoOfkids() >= 3)
+				c.push(fObj);
+			else
+				newA.push(fObj);
+
+			tmpA.pop();
+		}
+
+		if(!tmpB.empty())
+		{
+			Family fObj = tmpB.front();
+
+			if(fObj.getnoOfkids() >= 3)
+				c.push(fObj);
+			else
+				newB.push(fObj);
+
+			tmpB.pop();
+		}
+	}
             
-    
+    a = newA;
+	b = newB;
+
+	return c;
 }
 
 queue <Family> ReOrganize(queue<Family>& a, queue<Family>& b)
