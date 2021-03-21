@@ -4,6 +4,7 @@
 #include<string>
 #include<cstring>
 #include<cctype>
+#include<vector>
 using namespace std;
 
 /*
@@ -14,10 +15,12 @@ Map -> 2D array of nodes. start, goal
 
 class Node {
 private :
-    int x, y, cost, left, right, up, down;
+    int x, y, cost;
+    bool left, right, up, down;
     char status = ' ';
     char name = ' ';
-    Node(int nx, int ny, int ncost, int nleft, int nright, int nup, int ndown,char nname) {
+public:
+    Node(int nx, int ny, int ncost, bool nleft, bool nright, bool nup, bool ndown,char nname) {
         x = nx;
         y = ny;
         cost = ncost;
@@ -29,9 +32,17 @@ private :
     }
 };
 
+class Map {
+public:
+    vector<vector<Node*>> map;
+};
+
 
 void loadMap() {
 	// Just copy pasted from lab script. Change to create nodes as needed.
+
+    Map maze;
+
     string filename;
     cout << "Enter the name of the file:" << endl;
     cin >> filename;
@@ -52,7 +63,7 @@ void loadMap() {
         char name = ' ';
         bool above, below, right, left;
         cout << "line " << line << endl;
-
+        vector<Node*> row; // To store the nodes in this row.
         while (i < strlen(str1) - 1) {
             above = below = right = left = true;
             name = ' ';
@@ -86,7 +97,11 @@ void loadMap() {
             cout << "cost: " << cost << endl;
             cout << "name: " << name << endl;
             cout << endl << endl;
+
+            //Create the Node and put it into the row vector
+            row.push_back(new Node(line, cell, cost, left, right, above, below, name));
         }
+        maze.map.push_back(row); 
 
         strcpy(str1, str3);
         cout << str1 << endl;
