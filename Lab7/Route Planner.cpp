@@ -1,3 +1,4 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include<fstream>
 #include<string>
@@ -7,9 +8,26 @@ using namespace std;
 
 /*
 Need class for:
-Node -> x,y,name,isVisited,char,cost,left,right,up,down,prevx,prevx (could use list of neighbors instead),status(char . or o)
-Map -> 2D array. start, goal
+Node -> x,y,name,isVisited,char,cost,left,right,up,down,prevx,prevy (could use list of neighbors instead),status(char . or o)
+Map -> 2D array of nodes. start, goal
 */
+
+class Node {
+private :
+    int x, y, cost, left, right, up, down;
+    char status = ' ';
+    char name = ' ';
+    Node(int nx, int ny, int ncost, int nleft, int nright, int nup, int ndown,char nname) {
+        x = nx;
+        y = ny;
+        cost = ncost;
+        left = nleft;
+        right = nright;
+        up = nup;
+        down = ndown;
+        name = nname;
+    }
+};
 
 
 void loadMap() {
@@ -80,7 +98,7 @@ void loadMap() {
     }
 }
 
-
+///*
 int menu() {
 	cout << "Menu:" << endl;
 	cout << "1.Load Map" << endl;
@@ -129,3 +147,4 @@ int main() {
 	}
 	return 0;
 }
+//*/
