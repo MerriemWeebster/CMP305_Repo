@@ -9,13 +9,13 @@ using namespace std;
 
 /*
 Need class for:
-Node -> x,y,name,isVisited,char,cost,left,right,up,down,prevx,prevy (could use list of neighbors instead),status(char . or o)
+Node -> x,y,name,isVisited,char,cost,left,right,up,down,parentx,parenty,status(char . or o)
 Map -> 2D array of nodes. start, goal
 */
 
 class Node {
 private :
-    int x, y, cost;
+    int x, y, cost, parentx, parenty;
     bool left, right, up, down;
     char status = ' ';
     char name = ' ';
@@ -29,6 +29,13 @@ public:
         up = nup;
         down = ndown;
         name = nname;
+        parentx = -1;
+        parenty = -1;
+    }
+    friend ostream& operator<< (ostream& outs, Node n) {
+        outs << "(x,y) = (" << n.x << "," << n.y << "). Cost = " << n.cost << " left,right,up,down : "
+            << n.left << n.right << n.up << n.down << " Name = " << n.name;
+        return outs;
     }
 };
 
@@ -37,11 +44,7 @@ public:
     vector<vector<Node*>> map;
 };
 
-
-void loadMap() {
-	// Just copy pasted from lab script. Change to create nodes as needed.
-
-    Map maze;
+Map& loadMap(Map& maze) {
 
     string filename;
     cout << "Enter the name of the file:" << endl;
@@ -49,7 +52,7 @@ void loadMap() {
     ifstream in(filename);
     if (in.fail()) {
         cout << "Invalid file name!" << endl;
-        return;
+        return maze;
     }
     cout << "Loading map..." << endl;
     char str1[100], str2[100], str3[100];
@@ -111,7 +114,24 @@ void loadMap() {
         cout << str3 << endl;
         line++;
     }
+    return maze;
 }
+
+void displayMap(Map maze) {
+    for (int i = 0; i < maze.map.size(); i++) {
+        for (int j = 0; j < maze.map[i].size(); j++) {
+            cout << *maze.map[i][j] << endl;
+        }
+    }
+}
+
+// TBD
+void setStart(){}
+void setGoal(){}
+void DFS(){}
+void BFS(){}
+void DA(){}
+void displayPath(){}
 
 ///*
 int menu() {
@@ -137,12 +157,13 @@ int main() {
 		choice = menu();
 	} while (!(choice >= 1 and choice <= 9));
 	bool quit = false;
+    Map maze;
 	while (choice >= 1 and choice <= 9 and not quit) {
 		switch (choice) {
 		case 1:
-			loadMap(); break;
+			maze=loadMap(maze); break;
 		case 2:
-			displayMap(); break;
+			displayMap(maze); break;
 		case 3:
 			setStart(); break;
 		case 4:
@@ -158,7 +179,9 @@ int main() {
 		case 9:
 			cout << "Good bye!! :) " << endl;
 			quit = true;
+            break;
 		}
+        choice = menu();
 	}
 	return 0;
 }
