@@ -37,6 +37,9 @@ public:
             << n.left << n.right << n.up << n.down << " Name = " << n.name;
         return outs;
     }
+    char getName() { return name; }
+    bool getRight() { return right; }
+    bool getDown() { return down; }
 };
 
 class Map {
@@ -47,8 +50,11 @@ public:
 Map& loadMap(Map& maze) {
 
     string filename;
+    /*
     cout << "Enter the name of the file:" << endl;
     cin >> filename;
+    */
+    filename = "map1.txt";
     ifstream in(filename);
     if (in.fail()) {
         cout << "Invalid file name!" << endl;
@@ -117,12 +123,37 @@ Map& loadMap(Map& maze) {
     return maze;
 }
 
-void displayMap(Map maze) {
+void displayMap(const Map& maze) {
+
+    //Top row of the map
+    cout << '+';
+    for (int i = 0; i < maze.map.size(); i++)
+        cout << "---+";
+    cout << endl;
+    //Middle rows:
     for (int i = 0; i < maze.map.size(); i++) {
+        cout << '|';
         for (int j = 0; j < maze.map[i].size(); j++) {
-            cout << *maze.map[i][j] << endl;
+            
+            cout << " " << maze.map[i][j]->getName() << " ";
+            if (!maze.map[i][j]->getRight()) {
+                cout << '|';
+            }
+            else { cout << ' '; }
         }
+        cout << endl;
+        cout << '+';
+        for (int j = 0; j < maze.map[i].size(); j++) {
+            if (!maze.map[i][j]->getDown()) {
+                cout << "---+";
+            }
+            else {
+                cout << "   +";
+            }
+        }
+        cout << endl;
     }
+    cout << endl;
 }
 
 // TBD
