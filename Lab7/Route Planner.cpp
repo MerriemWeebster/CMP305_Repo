@@ -10,7 +10,7 @@
 using namespace std;
 
 /*
-Need class for:
+Classes for:
 Node -> x,y,name,isVisited,char,cost,left,right,up,down,parentx,parenty,status(char . or o)
 Map -> 2D array of nodes. start, goal
 */
@@ -49,6 +49,8 @@ public:
     bool getGoal() { return isGoal; }
     int getCost() { return cost; }
     bool Visited() { return isVisited; }
+    int getX() { return x; }
+    int getY() { return y; }
     bool getUp() { return up; }
     bool getLeft() { return left; }
     void setVisited(bool v) { isVisited = v; }
@@ -56,6 +58,7 @@ public:
     void setGoal(bool g) { isGoal = g; }
     void setParent(int x, int y) { parentx = x; parenty = y; }
     bool hasParent() { return !(parentx == -1 && parenty == -1); }
+    void setName(char n) { name = n; }
     int getParentY() { return parenty; }
     int getParentX() { return parentx; }
 
@@ -122,7 +125,8 @@ void loadMap(Map& maze) {
     cout << "Enter the name of the file:" << endl;
     cin >> filename;
     */
-    filename = "map1.txt";
+    string location = "C:/Users/rohan/Desktop/AUS Year 2/Sem 4/Data Structures and Algorithms/Labs/CMP305_Repo/Lab7/";
+    filename = location+ "map2.txt";
     ifstream in(filename);
     if (in.fail()) {
         cout << "Invalid file name!" << endl;
@@ -166,7 +170,8 @@ void loadMap(Map& maze) {
             else if (str3[k] == '-') below = false;
             // else error
             k = k + 4; // wall below
-            
+            cell++;
+            /*
             cout << "cell = " << cell++ << endl;
             cout << "above: " << above << "\t";
             cout << "below: " << below << endl;
@@ -175,20 +180,21 @@ void loadMap(Map& maze) {
             cout << "cost: " << cost << endl;
             cout << "name: " << name << endl;
             cout << endl << endl;
-            
+            */
             //Create the Node and put it into the row vector
             row.push_back(new Node(line, cell, cost, left, right, above, below, name));
         }
         maze.map.push_back(row); 
         
         strcpy(str1, str3);
-        cout << str1 << endl;
+        //cout << str1 << endl;
         in.getline(str2, 100);
         in.getline(str3, 100);
-        cout << str2 << endl;
-        cout << str3 << endl;
+        //cout << str2 << endl;
+        //cout << str3 << endl;
         line++;
     }
+    cout << "Map loaded!" << endl << endl;
     //return maze;
 }
 
@@ -198,7 +204,7 @@ void displayMap(const Map& maze) {
 
     //Top row of the map
     cout << '+';
-    for (int i = 0; i < maze.map.size(); i++)
+    for (int i = 0; i < maze.map[0].size(); i++)
         cout << "---+";
     cout << endl;
     //Middle rows:
@@ -272,17 +278,15 @@ void setGoal(Map & maze){
     cout << goal << " does not exist! Please try again!" << endl << endl;
 }
 
-// TBD
-//DFS BFS Print coordinates
 stack<Node*> DFS(Map& maze){
     Node* startNode = maze.start;
     Node* goalNode = maze.goal;
-    queue<Node*> frontier;
+    stack<Node*> frontier;
     Node* currentnode;
     frontier.push(startNode);
     bool ReachedGoal = false;
     while (!frontier.empty() || ReachedGoal == false) {
-        currentnode = frontier.front();
+        currentnode = frontier.top();
         frontier.pop();
         if (currentnode == goalNode) {
             ReachedGoal = true;
@@ -291,12 +295,21 @@ stack<Node*> DFS(Map& maze){
             path.push(currentnode);
             while (currentnode->hasParent()) {
                 currentnode = maze.map[currentnode->getParentX()][currentnode->getParentY()];
+                if (currentnode != maze.start) currentnode->setName('o');
                 path.push(currentnode);
             }
+            stack<Node*> copy = path;
+            while (!copy.empty()) {
+                if (copy.top()->getName() != 'o' && copy.top()->getName() != '.' && copy.top()->getName() != ' ')
+                    cout << copy.top()->getName();
+                cout << '(' << copy.top()->getX() << ',' << copy.top()->getY() << ") ";
+                copy.pop();
+            }
             return path;
+
         }
         currentnode->setVisited(true);
-        
+        if (currentnode != maze.start) currentnode->setName('.');
         if (!ReachedGoal)//Find the node:
             for (int i = 0; i < maze.map.size(); i++) {
                 for (int j = 0; j < maze.map[i].size(); j++) {
@@ -320,12 +333,12 @@ stack<Node*> DFS(Map& maze){
 stack<Node*> BFS(Map& maze){
     Node* startNode = maze.start;
     Node* goalNode = maze.goal;
-    stack<Node*> frontier;
+    queue<Node*> frontier;
     Node* currentnode;
     frontier.push(startNode);
     bool ReachedGoal = false;
     while (!frontier.empty() || ReachedGoal == false) {
-        currentnode = frontier.top();
+        currentnode = frontier.front();
         frontier.pop();
         if (currentnode == goalNode) {
             ReachedGoal = true;
@@ -334,12 +347,25 @@ stack<Node*> BFS(Map& maze){
             path.push(currentnode);
             while (currentnode->hasParent()) {
                 currentnode = maze.map[currentnode->getParentX()][currentnode->getParentY()];
+                if (currentnode != maze.start)
+                    currentnode->setName('o');
                 path.push(currentnode);
             }
+
+            stack<Node*> copy = path;
+            cout << "Solution path: ";
+            while (!copy.empty()) {
+                if (copy.top()->getName() != 'o' && copy.top()->getName() != '.' && copy.top()->getName() != ' ')
+                    cout << copy.top()->getName();
+                cout << '(' << copy.top()->getX() << ',' << copy.top()->getY() << ") ";
+                copy.pop();
+            }
+            cout << endl << endl;
             return path;
         }
         currentnode->setVisited(true);
-        
+        if(currentnode!=maze.start)
+            currentnode->setName('.');
         if (!ReachedGoal)//Find the node:
             for (int i = 0; i < maze.map.size(); i++) {
                 for (int j = 0; j < maze.map[i].size(); j++) {
@@ -364,7 +390,8 @@ struct compareCosts { // defining the comparison operator
         return s1->getCost() > s2->getCost();
     }
 };
-
+// TBD
+// Dijkstra
 stack<Node*> DA(Map& maze){
     Node* startNode = maze.start;
     Node* goalNode = maze.goal;
@@ -383,11 +410,22 @@ stack<Node*> DA(Map& maze){
             path.push(currentnode);
             while (currentnode->hasParent()) {
                 currentnode = maze.map[currentnode->getParentX()][currentnode->getParentY()];
+                if (currentnode->getName() =='.') currentnode->setName((char)(currentnode->getCost()+48));
                 path.push(currentnode);
             }
+            stack<Node*> copy = path;
+            cout << "Solution path: ";
+            while (!copy.empty()) {
+                if (!( (int)(copy.top()->getName())>=int('0') && (int)(copy.top()->getName()) <= int('9')) && copy.top()->getName() != '.' && copy.top()->getName() != ' ')
+                    cout << copy.top()->getName();
+                cout << '(' << copy.top()->getX() << ',' << copy.top()->getY() << ") ";
+                copy.pop();
+            }
+            cout << endl << endl;
             return path;
         }
         currentnode->setVisited(true);
+        if (currentnode->getName() == ' ') currentnode->setName('.');
 
         if (!ReachedGoal)//Find the node:
             for (int i = 0; i < maze.map.size(); i++) {
@@ -408,14 +446,16 @@ stack<Node*> DA(Map& maze){
     }
 }
 
+// Do we even need this? Just call displayMap()
 void displayPath(stack<Node*> path){
+    
     while (!path.empty()) {
         cout << *(path.top()) << endl;
         path.pop();
     }
 }
 
-///*
+
 int menu() {
 	cout << "Menu:" << endl;
 	cout << "1.Load Map" << endl;
@@ -459,7 +499,8 @@ int main() {
 		case 7:
             path = DA(maze); break;
 		case 8:
-			displayPath(path); break;
+			//displayPath(path); break;
+            displayMap(maze); break;
 		case 9:
 			cout << "Good bye!! :) " << endl;
 			quit = true;
@@ -470,4 +511,3 @@ int main() {
 	}
 	return 0;
 }
-//*/
