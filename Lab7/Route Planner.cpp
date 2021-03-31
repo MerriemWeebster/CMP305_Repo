@@ -5,6 +5,8 @@
 #include<cstring>
 #include<cctype>
 #include<vector>
+#include<stack>
+#include<queue>
 using namespace std;
 
 /*
@@ -16,7 +18,7 @@ Map -> 2D array of nodes. start, goal
 class Node {
 private :
     int x, y, cost, parentx, parenty;
-    bool left, right, up, down;
+    bool left, right, up, down, isStart, isGoal, isVisited;
     char status = ' ';
     char name = ' ';
 public:
@@ -31,6 +33,9 @@ public:
         name = nname;
         parentx = -1;
         parenty = -1;
+        isStart = false;
+        isGoal = false;
+        isVisited = false;
     }
     friend ostream& operator<< (ostream& outs, Node n) {
         outs << "(x,y) = (" << n.x << "," << n.y << "). Cost = " << n.cost << " left,right,up,down : "
@@ -40,11 +45,36 @@ public:
     char getName() { return name; }
     bool getRight() { return right; }
     bool getDown() { return down; }
+    bool getStart() { return isStart; }
+    bool getGoal() { return isGoal; }
+    bool Visited() { return isVisited; }
+    bool getUp() { return up; }
+    bool getLeft() { return left; }
+    void setVisited(bool v) { isVisited = v; }
+    void setStart(bool s) { isStart = s; }
+    void setGoal(bool g) { isGoal = g; }
+    void setParent(int x, int y) { parentx = x; parenty = y; }
+    bool hasParent() { return !(parentx == -1 && parenty == -1); }
+    int getParentY() { return parenty; }
+    int getParentX() { return parentx; }
 };
 
 class Map {
 public:
     vector<vector<Node*>> map;
+    Node* start;
+    Node* goal;
+    bool isEmpty() const {
+        if (map.size() == 0) {
+            return false;
+        }
+        if (map[0].size() == 0) {
+            return false;
+        }
+        return true;
+    }
+    void setStart(Node* s) { start = s; }
+    void setGoal(Node* g) { goal = g; }
 };
 
 Map& loadMap(Map& maze) {
@@ -125,6 +155,8 @@ Map& loadMap(Map& maze) {
 
 void displayMap(const Map& maze) {
 
+    if (maze.isEmpty()) cout << "Error: no map available." << endl;
+
     //Top row of the map
     cout << '+';
     for (int i = 0; i < maze.map.size(); i++)
@@ -135,7 +167,16 @@ void displayMap(const Map& maze) {
         cout << '|';
         for (int j = 0; j < maze.map[i].size(); j++) {
             
-            cout << " " << maze.map[i][j]->getName() << " ";
+            if (maze.map[i][j]->getStart()) {
+                cout << "(" << maze.map[i][j]->getName() << ")";
+            }
+            else if (maze.map[i][j]->getGoal()) {
+                cout << "{" << maze.map[i][j]->getName() << "}";
+            }
+            else {
+                cout << " " << maze.map[i][j]->getName() << " ";
+            }
+
             if (!maze.map[i][j]->getRight()) {
                 cout << '|';
             }
@@ -156,13 +197,91 @@ void displayMap(const Map& maze) {
     cout << endl;
 }
 
+void setStart(Map& maze){
+    char start;
+    cout << "Enter the start point: ";
+    cin >> start;
+    start = toupper(start);
+    for (int i = 0; i < maze.map.size(); i++) {
+        for (int j = 0; j < maze.map[i].size(); j++) {
+            if (start == maze.map[i][j]->getName()) {
+                maze.map[i][j]->setStart(true);
+                maze.setStart(maze.map[i][j]);
+                cout << "Start has been set to " << start << endl << endl;
+                return;
+            }
+        }
+    }
+    cout << start << " does not exist! Please try again!" << endl << endl;
+}
+
+void setGoal(Map & maze){
+    char goal;
+    cout << "Enter the goal point: ";
+    cin >> goal;
+    goal = toupper(goal);
+    for (int i = 0; i < maze.map.size(); i++) {
+        for (int j = 0; j < maze.map[i].size(); j++) {
+            if (goal == maze.map[i][j]->getName()) {
+                maze.map[i][j]->setGoal(true);
+                maze.setGoal(maze.map[i][j]);
+                cout << "Goal has been set to " << goal << endl << endl;
+                return;
+            }
+        }
+    }
+    cout << goal << " does not exist! Please try again!" << endl << endl;
+}
+
 // TBD
-void setStart(){}
-void setGoal(){}
-void DFS(){}
-void BFS(){}
-void DA(){}
-void displayPath(){}
+stack<Node*> DFS(Map& maze){
+    Node* startNode = maze.start;
+    Node* goalNode = maze.goal;
+    queue<Node*> frontier;
+    Node* currentnode;
+    frontier.push(startNode);
+    bool ReachedGoal = false;
+    while (!frontier.empty() || ReachedGoal == false) {
+        currentnode = frontier.front();
+        frontier.pop();
+        if (currentnode == goalNode) {
+            ReachedGoal = true;
+            //Backtrack the solution and find path
+            stack<Node*> path;
+            path.push(currentnode);
+            while (currentnode->hasParent()) {
+                currentnode = maze.map[currentnode->getParentX()][currentnode->getParentY()];
+                path.push(currentnode);
+            }
+            return path;
+        }
+        currentnode->setVisited(true);
+        
+        if (!ReachedGoal)//Find the node:
+            for (int i = 0; i < maze.map.size(); i++) {
+                for (int j = 0; j < maze.map[i].size(); j++) {
+                    if (maze.map[i][j] == currentnode) {
+                        // Check if the neighbors have been explored. If they havent, push into frontier
+                        if(maze.map[i][j]->getRight())
+                            if (!maze.map[i][j + 1]->Visited()) { maze.map[i][j + 1]->setParent(i,j); frontier.push(maze.map[i][j + 1]); }
+                        if (maze.map[i][j]->getLeft())
+                            if (!maze.map[i][j - 1]->Visited()) { maze.map[i][j - 1]->setParent(i, j); frontier.push(maze.map[i][j - 1]); }
+                        if (maze.map[i][j]->getDown())
+                            if (!maze.map[i + 1][j]->Visited()) { maze.map[i + 1][j]->setParent(i, j); frontier.push(maze.map[i + 1][j]); }
+                        if (maze.map[i][j]->getUp())
+                            if (!maze.map[i - 1][j]->Visited()) { maze.map[i - 1][j]->setParent(i, j); frontier.push(maze.map[i - 1][j]); }
+                    }
+                }
+            }
+
+    }
+}
+
+void BFS(Map& maze){}
+
+void DA(Map& maze){}
+
+void displayPath(Map& maze){}
 
 ///*
 int menu() {
@@ -189,6 +308,7 @@ int main() {
 	} while (!(choice >= 1 and choice <= 9));
 	bool quit = false;
     Map maze;
+    stack<Node*> path;
 	while (choice >= 1 and choice <= 9 and not quit) {
 		switch (choice) {
 		case 1:
@@ -196,17 +316,17 @@ int main() {
 		case 2:
 			displayMap(maze); break;
 		case 3:
-			setStart(); break;
+			setStart(maze); break;
 		case 4:
-			setGoal(); break;
+			setGoal(maze); break;
 		case 5:
-			DFS(); break;
+			path = DFS(maze); break;
 		case 6:
-			BFS(); break;
+			BFS(maze); break;
 		case 7:
-			DA(); break;
+			DA(maze); break;
 		case 8:
-			displayPath(); break;
+			displayPath(maze); break;
 		case 9:
 			cout << "Good bye!! :) " << endl;
 			quit = true;
