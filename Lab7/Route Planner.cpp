@@ -181,7 +181,8 @@ int main() {
 			quit = true;
             break;
 		}
-        choice = menu();
+        if(!quit)
+            choice = menu();
 	}
 	return 0;
 }
