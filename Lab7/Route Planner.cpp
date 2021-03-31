@@ -47,6 +47,7 @@ public:
     bool getDown() { return down; }
     bool getStart() { return isStart; }
     bool getGoal() { return isGoal; }
+    int getCost() { return cost; }
     bool Visited() { return isVisited; }
     bool getUp() { return up; }
     bool getLeft() { return left; }
@@ -121,7 +122,7 @@ void loadMap(Map& maze) {
     cout << "Enter the name of the file:" << endl;
     cin >> filename;
     */
-    filename = "map cost.txt";
+    filename = "map1.txt";
     ifstream in(filename);
     if (in.fail()) {
         cout << "Invalid file name!" << endl;
@@ -358,10 +359,17 @@ stack<Node*> BFS(Map& maze){
     }
 }
 
+struct compareCosts { // defining the comparison operator
+    bool operator() (Node* & s1, Node* & s2) {
+        return s1->getCost() > s2->getCost();
+    }
+};
+
 stack<Node*> DA(Map& maze){
     Node* startNode = maze.start;
     Node* goalNode = maze.goal;
-    stack<Node*> frontier;
+
+    priority_queue<Node*,vector<Node*>,compareCosts> frontier;
     Node* currentnode;
     frontier.push(startNode);
     bool ReachedGoal = false;
