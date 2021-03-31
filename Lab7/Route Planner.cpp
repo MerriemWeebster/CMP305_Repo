@@ -277,7 +277,48 @@ stack<Node*> DFS(Map& maze){
     }
 }
 
-void BFS(Map& maze){}
+queue<Node*> BFS(Map& maze){
+    Node* startNode = maze.start;
+    Node* goalNode = maze.goal;
+    stack<Node*> frontier;
+    Node* currentnode;
+    frontier.push(startNode);
+    bool ReachedGoal = false;
+    while (!frontier.empty() || ReachedGoal == false) {
+        currentnode = frontier.top();
+        frontier.pop();
+        if (currentnode == goalNode) {
+            ReachedGoal = true;
+            //Backtrack the solution and find path
+            queue<Node*> path;
+            path.push(currentnode);
+            while (currentnode->hasParent()) {
+                currentnode = maze.map[currentnode->getParentX()][currentnode->getParentY()];
+                path.push(currentnode);
+            }
+            return path;
+        }
+        currentnode->setVisited(true);
+        
+        if (!ReachedGoal)//Find the node:
+            for (int i = 0; i < maze.map.size(); i++) {
+                for (int j = 0; j < maze.map[i].size(); j++) {
+                    if (maze.map[i][j] == currentnode) {
+                        // Check if the neighbors have been explored. If they havent, push into frontier
+                        if(maze.map[i][j]->getRight())
+                            if (!maze.map[i][j + 1]->Visited()) { maze.map[i][j + 1]->setParent(i,j); frontier.push(maze.map[i][j + 1]); }
+                        if (maze.map[i][j]->getLeft())
+                            if (!maze.map[i][j - 1]->Visited()) { maze.map[i][j - 1]->setParent(i, j); frontier.push(maze.map[i][j - 1]); }
+                        if (maze.map[i][j]->getDown())
+                            if (!maze.map[i + 1][j]->Visited()) { maze.map[i + 1][j]->setParent(i, j); frontier.push(maze.map[i + 1][j]); }
+                        if (maze.map[i][j]->getUp())
+                            if (!maze.map[i - 1][j]->Visited()) { maze.map[i - 1][j]->setParent(i, j); frontier.push(maze.map[i - 1][j]); }
+                    }
+                }
+            }
+
+    }
+}
 
 void DA(Map& maze){}
 
@@ -305,11 +346,11 @@ int main() {
 	int choice;
 	do{
 		choice = menu();
-	} while (!(choice >= 1 and choice <= 9));
+	} while (!(choice >= 1 && choice <= 9));
 	bool quit = false;
     Map maze;
     stack<Node*> path;
-	while (choice >= 1 and choice <= 9 and not quit) {
+	while (choice >= 1 && choice <= 9 && !quit) {
 		switch (choice) {
 		case 1:
 			maze=loadMap(maze); break;
