@@ -61,23 +61,6 @@ public:
     void setName(char n) { name = n; }
     int getParentY() { return parenty; }
     int getParentX() { return parentx; }
-
-    Node* operator=(const Node* rhs) {
-        x = rhs->x;
-        y = rhs->y;
-        cost = rhs->cost;
-        left = rhs->left;
-        right = rhs->right;
-        up = rhs->up;
-        down = rhs->down;
-        name = rhs->name;
-        parentx = rhs->parentx;
-        parenty = rhs->parenty;
-        isStart = rhs->isStart;
-        isGoal = rhs->isGoal;
-        isVisited = rhs->isVisited;
-        return this;
-    }
 };
 
 class Map {
@@ -96,37 +79,15 @@ public:
     }
     void setStart(Node* s) { start = s; }
     void setGoal(Node* g) { goal = g; }
-
-    Map operator=(const Map& rhs) {
-        for (int i = 0; i < this->map.size(); i++) {
-            for (int j = 0; j < this->map[i].size(); j++) {
-                delete (map[i][j]);
-            }
-        }
-        map.erase(map.begin(), map.end());
-
-        for (int i = 0; i < rhs.map.size(); i++) {
-            vector<Node*> row;
-            for (int j = 0; j < rhs.map[i].size(); j++) {
-                Node* temp;
-                temp = rhs.map[i][j]; //Calls the assignment operator for Node
-                row.push_back(temp);
-            }
-            map.push_back(row);
-        }
-        return *this;
-    }
 };
 
 void loadMap(Map& maze) {
 
     string filename;
-    /*
     cout << "Enter the name of the file:" << endl;
     cin >> filename;
-    */
     string location = "C:/Users/rohan/Desktop/AUS Year 2/Sem 4/Data Structures and Algorithms/Labs/CMP305_Repo/Lab7/";
-    filename = location+ "map2.txt";
+    filename = location + filename;
     ifstream in(filename);
     if (in.fail()) {
         cout << "Invalid file name!" << endl;
@@ -305,18 +266,19 @@ stack<Node*> DFS(Map& maze){
                 cout << '(' << copy.top()->getX() << ',' << copy.top()->getY() << ") ";
                 copy.pop();
             }
+            cout << endl << endl;
             return path;
 
         }
         currentnode->setVisited(true);
-        if (currentnode != maze.start) currentnode->setName('.');
+        if (currentnode != startNode) currentnode->setName('.');
         if (!ReachedGoal)//Find the node:
             for (int i = 0; i < maze.map.size(); i++) {
                 for (int j = 0; j < maze.map[i].size(); j++) {
                     if (maze.map[i][j] == currentnode) {
                         // Check if the neighbors have been explored. If they havent, push into frontier
                         if(maze.map[i][j]->getRight())
-                            if (!maze.map[i][j + 1]->Visited()) { maze.map[i][j + 1]->setParent(i,j); frontier.push(maze.map[i][j + 1]); }
+                            if (!maze.map[i][j + 1]->Visited()) { maze.map[i][j + 1]->setParent(i, j); frontier.push(maze.map[i][j + 1]); }
                         if (maze.map[i][j]->getLeft())
                             if (!maze.map[i][j - 1]->Visited()) { maze.map[i][j - 1]->setParent(i, j); frontier.push(maze.map[i][j - 1]); }
                         if (maze.map[i][j]->getDown())
@@ -390,8 +352,8 @@ struct compareCosts { // defining the comparison operator
         return s1->getCost() > s2->getCost();
     }
 };
-// TBD
-// Dijkstra
+
+
 stack<Node*> DA(Map& maze){
     Node* startNode = maze.start;
     Node* goalNode = maze.goal;
@@ -489,7 +451,7 @@ int main() {
 		case 2:
 			displayMap(maze); break;
 		case 3:
-            setStart(maze);  break; //cleanMaze = maze; cout << cleanMaze.map[0][0] << "    " << maze.map[0][0];
+            setStart(maze);  break;
 		case 4:
 			setGoal(maze);break;
 		case 5:
