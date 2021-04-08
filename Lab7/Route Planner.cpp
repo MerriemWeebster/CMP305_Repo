@@ -68,6 +68,9 @@ public:
     vector<vector<Node*>> map;
     Node* start;
     Node* goal;
+
+    Map() :start{}, goal{}, map{} {}
+
     bool isEmpty() const {
         if (map.size() == 0) {
             return true;
@@ -81,7 +84,7 @@ public:
     void setGoal(Node* g) { goal = g; }
 };
 
-void loadMap(Map& maze) {
+bool loadMap(Map& maze) {
 
     string filename;
     cout << "Enter the name of the file:" << endl;
@@ -91,7 +94,7 @@ void loadMap(Map& maze) {
     ifstream in(filename);
     if (in.fail()) {
         cout << "Invalid file name!" << endl;
-        return;
+        return false;
     }
     cout << "Loading map..." << endl;
     char str1[100], str2[100], str3[100];
@@ -104,7 +107,6 @@ void loadMap(Map& maze) {
         int i = 0, j = 0, k = 1, cost = -1, cell = 0;
         char name = ' ';
         bool above, below, right, left;
-        //cout << "line " << line << endl;
         vector<Node*> row; // To store the nodes in this row.
         while (i < strlen(str1) - 1) {
             above = below = right = left = true;
@@ -132,31 +134,19 @@ void loadMap(Map& maze) {
             // else error
             k = k + 4; // wall below
             cell++;
-            /*
-            cout << "cell = " << cell++ << endl;
-            cout << "above: " << above << "\t";
-            cout << "below: " << below << endl;
-            cout << "right: " << right << "\t";
-            cout << "left: " << left << endl;
-            cout << "cost: " << cost << endl;
-            cout << "name: " << name << endl;
-            cout << endl << endl;
-            */
+
             //Create the Node and put it into the row vector
             row.push_back(new Node(line, cell, cost, left, right, above, below, name));
         }
         maze.map.push_back(row); 
         
         strcpy(str1, str3);
-        //cout << str1 << endl;
         in.getline(str2, 100);
         in.getline(str3, 100);
-        //cout << str2 << endl;
-        //cout << str3 << endl;
         line++;
     }
     cout << "Map loaded!" << endl << endl;
-    //return maze;
+    return true;
 }
 
 void displayMap(const Map& maze) {
@@ -203,7 +193,7 @@ void displayMap(const Map& maze) {
     cout << endl;
 }
 
-void setStart(Map& maze){
+bool setStart(Map& maze){
     char start;
     cout << "Enter the start point: ";
     cin >> start;
@@ -214,14 +204,15 @@ void setStart(Map& maze){
                 maze.map[i][j]->setStart(true);
                 maze.setStart(maze.map[i][j]);
                 cout << "Start has been set to " << start << endl << endl;
-                return;
+                return true;
             }
         }
     }
     cout << start << " does not exist! Please try again!" << endl << endl;
+    return false;
 }
 
-void setGoal(Map & maze){
+bool setGoal(Map & maze){
     char goal;
     cout << "Enter the goal point: ";
     cin >> goal;
@@ -232,14 +223,16 @@ void setGoal(Map & maze){
                 maze.map[i][j]->setGoal(true);
                 maze.setGoal(maze.map[i][j]);
                 cout << "Goal has been set to " << goal << endl << endl;
-                return;
+                return true;
             }
         }
     }
     cout << goal << " does not exist! Please try again!" << endl << endl;
+    return false;
 }
 
-stack<Node*> DFS(Map& maze){
+
+void DFS(Map& maze){
     Node* startNode = maze.start;
     Node* goalNode = maze.goal;
     stack<Node*> frontier;
@@ -259,15 +252,15 @@ stack<Node*> DFS(Map& maze){
                 if (currentnode != maze.start) currentnode->setName('o');
                 path.push(currentnode);
             }
-            stack<Node*> copy = path;
-            while (!copy.empty()) {
-                if (copy.top()->getName() != 'o' && copy.top()->getName() != '.' && copy.top()->getName() != ' ')
-                    cout << copy.top()->getName();
-                cout << '(' << copy.top()->getX() << ',' << copy.top()->getY() << ") ";
-                copy.pop();
+            
+            while (!path.empty()) {
+                if (path.top()->getName() != 'o' && path.top()->getName() != '.' && path.top()->getName() != ' ')
+                    cout << path.top()->getName();
+                cout << '(' << path.top()->getX() << ',' << path.top()->getY() << ") ";
+                path.pop();
             }
             cout << endl << endl;
-            return path;
+            return; 
 
         }
         currentnode->setVisited(true);
@@ -290,9 +283,13 @@ stack<Node*> DFS(Map& maze){
             }
 
     }
+
+    //Exited the while loop means we did not reach goal (So we did not return)
+    //Hence, it must be that the frontier is empty (i.e. we explored all the nodes) and didnt find the goal.
+    cout << "No possible path found!" << endl << endl;
 }
 
-stack<Node*> BFS(Map& maze){
+void BFS(Map& maze){
     Node* startNode = maze.start;
     Node* goalNode = maze.goal;
     queue<Node*> frontier;
@@ -313,17 +310,15 @@ stack<Node*> BFS(Map& maze){
                     currentnode->setName('o');
                 path.push(currentnode);
             }
-
-            stack<Node*> copy = path;
             cout << "Solution path: ";
-            while (!copy.empty()) {
-                if (copy.top()->getName() != 'o' && copy.top()->getName() != '.' && copy.top()->getName() != ' ')
-                    cout << copy.top()->getName();
-                cout << '(' << copy.top()->getX() << ',' << copy.top()->getY() << ") ";
-                copy.pop();
+            while (!path.empty()) {
+                if (path.top()->getName() != 'o' && path.top()->getName() != '.' && path.top()->getName() != ' ')
+                    cout << path.top()->getName();
+                cout << '(' << path.top()->getX() << ',' << path.top()->getY() << ") ";
+                path.pop();
             }
             cout << endl << endl;
-            return path;
+            return;
         }
         currentnode->setVisited(true);
         if(currentnode!=maze.start)
@@ -345,6 +340,10 @@ stack<Node*> BFS(Map& maze){
                 }
             }
     }
+
+    //Exited the while loop means we did not reach goal (So we did not return)
+    //Hence, it must be that the frontier is empty (i.e. we explored all the nodes) and didnt find the goal.
+    cout << "No possible path found!" << endl << endl;
 }
 
 struct compareCosts { // defining the comparison operator
@@ -354,7 +353,7 @@ struct compareCosts { // defining the comparison operator
 };
 
 
-stack<Node*> DA(Map& maze){
+void DA(Map& maze){
     Node* startNode = maze.start;
     Node* goalNode = maze.goal;
 
@@ -375,16 +374,15 @@ stack<Node*> DA(Map& maze){
                 if (currentnode->getName() =='.') currentnode->setName((char)(currentnode->getCost()+48));
                 path.push(currentnode);
             }
-            stack<Node*> copy = path;
             cout << "Solution path: ";
-            while (!copy.empty()) {
-                if (!( (int)(copy.top()->getName())>=int('0') && (int)(copy.top()->getName()) <= int('9')) && copy.top()->getName() != '.' && copy.top()->getName() != ' ')
-                    cout << copy.top()->getName();
-                cout << '(' << copy.top()->getX() << ',' << copy.top()->getY() << ") ";
-                copy.pop();
+            while (!path.empty()) {
+                if (!( (int)(path.top()->getName())>=int('0') && (int)(path.top()->getName()) <= int('9')) && path.top()->getName() != '.' && path.top()->getName() != ' ')
+                    cout << path.top()->getName();
+                cout << '(' << path.top()->getX() << ',' << path.top()->getY() << ") ";
+                path.pop();
             }
             cout << endl << endl;
-            return path;
+            return;
         }
         currentnode->setVisited(true);
         if (currentnode->getName() == ' ') currentnode->setName('.');
@@ -406,16 +404,12 @@ stack<Node*> DA(Map& maze){
                 }
             }
     }
+
+    //Exited the while loop means we did not reach goal (So we did not return)
+    //Hence, it must be that the frontier is empty (i.e. we explored all the nodes) and didnt find the goal.
+    cout << "No possible path found!" << endl << endl;
 }
 
-// Do we even need this? Just call displayMap()
-void displayPath(stack<Node*> path){
-    
-    while (!path.empty()) {
-        cout << *(path.top()) << endl;
-        path.pop();
-    }
-}
 
 
 int menu() {
@@ -444,24 +438,52 @@ int main() {
     Map maze;
     stack<Node*> path;
     Map cleanMaze;
+    bool mapLoaded = false;
+    bool hasGoal = false;
+    bool hasStart = false;
+    // Need to check if maze loaded before setstart/goal and if start and goal been set before BFS,DFS,DA.
+
 	while (choice >= 1 && choice <= 9 && !quit) {
 		switch (choice) {
 		case 1:
-            loadMap(maze); break;
+            mapLoaded = loadMap(maze); break;
 		case 2:
+            //Output error if no map loaded
+            if (!mapLoaded) { cout << "No map loaded! Please load map first!" << endl; break; }
 			displayMap(maze); break;
 		case 3:
-            setStart(maze);  break;
+            //Output error if no map loaded
+            if (!mapLoaded) { cout << "No map loaded! Please load map first!" << endl; break; }
+            hasStart = setStart(maze);  break;
 		case 4:
-			setGoal(maze);break;
+            //Output error if no map loaded
+            if (!mapLoaded) { cout << "No map loaded! Please load map first!" << endl; break; }
+            hasGoal = setGoal(maze);break;
 		case 5:
-            path = DFS(maze); break;
+            //Output error if no map loaded
+            if (!mapLoaded) { cout << "No map loaded! Please load map first!" << endl; break; }
+            //Check if goal and start have been set:
+            if (!hasGoal || !hasStart) { cout << "Cannot call function! Start and/or Goal node not set!" << endl; break; }
+            //Call DFS with the newly loaded maze.
+            DFS(maze); break;
 		case 6:
-            path = BFS(maze); break;
+            //Output error if no map loaded
+            if (!mapLoaded) { cout << "No map loaded! Please load map first!" << endl; break; }
+            //Check if goal and start have been set:
+            if (!hasGoal || !hasStart) { cout << "Cannot call function! Start and/or Goal node not set!" << endl; break; }
+            //Call BFS with the newly loaded maze.
+            BFS(maze); break;
 		case 7:
-            path = DA(maze); break;
+            //Output error if no map loaded
+            if (!mapLoaded) { cout << "No map loaded! Please load map first!" << endl; break; }
+            //Check if goal and start have been set:
+            if (!hasGoal || !hasStart) { cout << "Cannot call function! Start and/or Goal node not set!" << endl; break; }
+            //Call Dijkstras Algorithm with the newly loaded maze.
+            DA(maze); break;
 		case 8:
-			//displayPath(path); break;
+            //Output error if no map loaded
+            if (!mapLoaded) { cout << "No map loaded! Please load map first!" << endl; break; }
+			//Call displayMap again because the names of the nodes have been changed to reflect 'o' or '.' respectively.
             displayMap(maze); break;
 		case 9:
 			cout << "Good bye!! :) " << endl;
