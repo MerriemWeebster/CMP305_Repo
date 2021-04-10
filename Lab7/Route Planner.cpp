@@ -129,11 +129,9 @@ bool loadMap(Map& maze) {
             if (str1[i] == '+') i++; // new path
             if (str1[i] == '-') above = false;
             else if (str1[i] == ' ') above = true;
-            // else error
             i = i + 3; // path left
             if (str2[j] == '|') left = false;
             else if (str2[j] == ' ') left = true;
-            // else error
             j = j + 2; // cost
             if (str2[j] != ' ')
                 if (isdigit(str2[j])) cost = (str2[j] - '0');
@@ -142,11 +140,9 @@ bool loadMap(Map& maze) {
             j = j + 2; //path right
             if (str2[j] == '|') right = false;
             else if (str2[j] == ' ') right = true;
-            // else error
             //path below
             if (str3[k] == ' ') below = true;
             else if (str3[k] == '-') below = false;
-            // else error
             k = k + 4; // wall below
             cell++;
 
