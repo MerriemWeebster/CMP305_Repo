@@ -23,7 +23,7 @@ private :
     bool left, right, up, down, isStart, isGoal, isVisited; //Basic node components to indicate items around the Node and its properties, 
     //such as being the start or goal and whether it has already been visited in the search algoritm.
     char name = ' ';
-    //Display name for Nodes on the map, mainly used for points (i.e A, B, C, etc.).
+    //Display name for Nodes on the map, mainly used for points (i.e A, B, C, etc.). Later used for '.' or 'o' during display
 public:
     //Constructor to set all private members mentioned above with appropriate default values
     Node(int nx = -1, int ny = -1, int ncost = -1, bool nleft = false , bool nright = false, bool nup = false, bool ndown = false, char nname=' ') {
@@ -42,7 +42,7 @@ public:
         isVisited = false;
     }
     
-    //Insertion operator for output of Node data, mainly used for debugging
+    //Insertion operator for output of Node data, mainly used for debugging purposes.
     friend ostream& operator<< (ostream& outs, Node n) {
         outs << "(x,y) = (" << n.x << "," << n.y << "). Cost = " << n.cost << " left,right,up,down : "
             << n.left << n.right << n.up << n.down << " Name = " << n.name;
@@ -73,12 +73,12 @@ public:
 
 //Map class that stores relevant information of the map. All nodes are stored in a 2D Vector of Node pointers in addition to a start and goal Node pointers.
 class Map {
-public:
+public: //Could be private, but not necessary in our case
     vector<vector<Node*>> map;
     Node* start;
     Node* goal;
 
-    //Constructor intializing the above mentioned members.
+    //Default constructor intializing the above mentioned members.
     Map() :start{}, goal{}, map{} {}
 
     //isEmpty function that checks whether the map has data or is empty, used when the map is being displayed.
@@ -97,18 +97,20 @@ public:
     void setGoal(Node* g) { goal = g; }
 };
 
-//Handling of reading map data from text files done by loadMap, a Map object is sent via reference as a parameter and is laoded with the appropriate data.
+//Handling of reading map data from text files done by loadMap, a Map object is sent via reference as a parameter and is loaded with the appropriate data.
+//Returns true if map loaded successfully, else returns false
 bool loadMap(Map& maze) {
     //File reading
     string filename;
     cout << "Enter the name of the file:" << endl;
     cin >> filename;
     string location = "C:/Users/rohan/Desktop/AUS Year 2/Sem 4/Data Structures and Algorithms/Labs/CMP305_Repo/Lab7/";
+    //Base location, not necessary if file is in the same folder.
     filename = location + filename;
     ifstream in(filename);
-    if (in.fail()) {
+    if (in.fail()) { //Incase map file name supplied does not exist
         cout << "Invalid file name!" << endl;
-        return false;
+        return false; //Could not load map, hence return false
     }
     cout << "Loading map..." << endl;
     //Insertion of map data into map object
@@ -149,6 +151,8 @@ bool loadMap(Map& maze) {
             //Create the Node and put it into the row vector
             row.push_back(new Node(line, cell, cost, left, right, above, below, name));
         }
+
+        //maze.map is a 2D vector of Node* Hence, we push_back an entire vector.
         maze.map.push_back(row); 
         
         strcpy(str1, str3);
@@ -157,12 +161,16 @@ bool loadMap(Map& maze) {
         line++;
     }
     cout << "Map loaded!" << endl << endl;
-    return true;
+    return true;//Map sucessfully loaded
 }
 
 void displayMap(const Map& maze) {
+    //Function to display map nicely (Similar to input file). Will automatically display the map when menu option "display path" has been called
+    // since the names of the nodes are changed to '.' or 'o' as necessary. Hence this one function handles both cases.
+    //Does not return anything, takes in maze by const reference so it does not copy the map (avoid loss of efficiency during copying incase
+    // of large map. Const keyword because we dont want to change any contents.
 
-    if (maze.isEmpty()) cout << "Error: no map available." << endl;
+    if (maze.isEmpty()) cout << "Error: no map available." << endl;//Error checking
 
     //Top row of the map
     cout << '+';
@@ -205,6 +213,7 @@ void displayMap(const Map& maze) {
 }
 
 //Sets the start point of the map by matching the user's input to the names of each Node. Error displayed if Node does not exist.
+//Returns true or false based on if a node was successfully set or not.
 bool setStart(Map& maze){
     char start;
     cout << "Enter the start point: ";
@@ -216,15 +225,16 @@ bool setStart(Map& maze){
                 maze.map[i][j]->setStart(true);
                 maze.setStart(maze.map[i][j]);
                 cout << "Start has been set to " << start << endl << endl;
-                return true;
+                return true; //Successfully set start node
             }
         }
     }
     cout << start << " does not exist! Please try again!" << endl << endl;
-    return false;
+    return false; //Unable to set start node
 }
 
 //Sets the goal point of the map by matching the user's input to the names of each Node. Error displayed if Node does not exist.
+//Returns true or false based on if a node was successfully set or not.
 bool setGoal(Map & maze){
     char goal;
     cout << "Enter the goal point: ";
@@ -236,37 +246,40 @@ bool setGoal(Map & maze){
                 maze.map[i][j]->setGoal(true);
                 maze.setGoal(maze.map[i][j]);
                 cout << "Goal has been set to " << goal << endl << endl;
-                return true;
+                return true;//Successfully set goal node
             }
         }
     }
     cout << goal << " does not exist! Please try again!" << endl << endl;
-    return false;
+    return false;//Unable to set goal node
 }
 
 //Calculates the path using the DFS algorithm
+//Backtrack and prints path if found the goal using the parent nodes in each Node object.
+//Does not return anything
 void DFS(Map& maze){
     Node* startNode = maze.start;
     Node* goalNode = maze.goal;
-    stack<Node*> frontier;
+    stack<Node*> frontier; // Our data structure to store all the nodes yet to be explored.
     Node* currentnode;
-    frontier.push(startNode);
+    frontier.push(startNode);//Start from the start node inside the frontier.
     bool ReachedGoal = false;
-    while (!frontier.empty() || ReachedGoal == false) {
-        currentnode = frontier.top();
-        frontier.pop();
-        if (currentnode == goalNode) {
+    while (!frontier.empty() || ReachedGoal == false) { //Loop until we're out of nodes to explore, or we found the goal
+        currentnode = frontier.top(); //Pick top node
+        frontier.pop(); //Remove from frontier as we are currently processing the top node.
+        if (currentnode == goalNode) { //Found goal
             ReachedGoal = true;
             //Backtrack the solution and find path
             stack<Node*> path;
             path.push(currentnode);
-            while (currentnode->hasParent()) {
-                currentnode = maze.map[currentnode->getParentX()][currentnode->getParentY()];
-                if (currentnode != maze.start) currentnode->setName('o');
-                path.push(currentnode);
+            while (currentnode->hasParent()) { // Do the following while the node has a parent node
+                currentnode = maze.map[currentnode->getParentX()][currentnode->getParentY()]; //Move currentnode to the parent node 
+                if (currentnode != maze.start) currentnode->setName('o'); 
+                //We keep the start node the same name. Else, we change all the names to 'o' to show the final path.
+                path.push(currentnode); // Add it to our path!
             }
             
-            while (!path.empty()) {
+            while (!path.empty()) { //Print out the path nicely
                 if (path.top()->getName() != 'o' && path.top()->getName() != '.' && path.top()->getName() != ' ')
                     cout << path.top()->getName();
                 cout << '(' << path.top()->getX() << ',' << path.top()->getY() << ") ";
@@ -276,8 +289,9 @@ void DFS(Map& maze){
             return; 
 
         }
+        //IF NOT REACHED GOAL:
         currentnode->setVisited(true);
-        if (currentnode != startNode) currentnode->setName('.');
+        if (currentnode != startNode) currentnode->setName('.'); //Dont change name of start node
         if (!ReachedGoal)//Find the node:
             for (int i = 0; i < maze.map.size(); i++) {
                 for (int j = 0; j < maze.map[i].size(); j++) {
@@ -303,28 +317,31 @@ void DFS(Map& maze){
 }
 
 //Calculates the path using the BFS algorithm
+//Backtrack and prints path if found the goal using the parent nodes in each Node object.
+//Does not return anything
 void BFS(Map& maze){
     Node* startNode = maze.start;
     Node* goalNode = maze.goal;
-    queue<Node*> frontier;
+    queue<Node*> frontier;// Our data structure to store all the nodes yet to be explored.
     Node* currentnode;
-    frontier.push(startNode);
+    frontier.push(startNode);//Start from the start node inside the frontier.
     bool ReachedGoal = false;
-    while (!frontier.empty() || ReachedGoal == false) {
+    while (!frontier.empty() || ReachedGoal == false) {//Loop until we're out of nodes to explore, or we found the goal
         currentnode = frontier.front();
-        frontier.pop();
+        frontier.pop(); // Remove from frontier as we are currently processing the top node.
         if (currentnode == goalNode) {
             ReachedGoal = true;
             //Backtrack the solution and find path
             stack<Node*> path;
             path.push(currentnode);
             while (currentnode->hasParent()) {
-                currentnode = maze.map[currentnode->getParentX()][currentnode->getParentY()];
+                currentnode = maze.map[currentnode->getParentX()][currentnode->getParentY()];//Move currentnode to the parent node 
                 if (currentnode != maze.start)
                     currentnode->setName('o');
-                path.push(currentnode);
+                //We keep the start node the same name. Else, we change all the names to 'o' to show the final path.
+                path.push(currentnode); //Add to path
             }
-            cout << "Solution path: ";
+            cout << "Solution path: "; //print path nicely
             while (!path.empty()) {
                 if (path.top()->getName() != 'o' && path.top()->getName() != '.' && path.top()->getName() != ' ')
                     cout << path.top()->getName();
@@ -334,9 +351,11 @@ void BFS(Map& maze){
             cout << endl << endl;
             return;
         }
+        
         currentnode->setVisited(true);
         if(currentnode!=maze.start)
             currentnode->setName('.');
+        // IF NOT FOUND THE GOAL:
         if (!ReachedGoal)//Find the node:
             for (int i = 0; i < maze.map.size(); i++) {
                 for (int j = 0; j < maze.map[i].size(); j++) {
@@ -368,29 +387,31 @@ struct compareCosts { // defining the comparison operator
 };
 
 //Uses the DA to find a path based on costs
+//Backtrack and prints path if found the goal using the parent nodes in each Node object.
+//Does not return anything
 void DA(Map& maze){
     Node* startNode = maze.start;
     Node* goalNode = maze.goal;
 
-    priority_queue<Node*,vector<Node*>,compareCosts> frontier;
+    priority_queue<Node*,vector<Node*>,compareCosts> frontier;// Our data structure to store all the nodes yet to be explored.
     Node* currentnode;
-    frontier.push(startNode);
+    frontier.push(startNode);//Start from the start node inside the frontier.
     bool ReachedGoal = false;
-    while (!frontier.empty() || ReachedGoal == false) {
+    while (!frontier.empty() || ReachedGoal == false) {//Loop until we're out of nodes to explore, or we found the goal
         currentnode = frontier.top();
-        frontier.pop();
+        frontier.pop();// Remove from frontier as we are currently processing the top node.
         if (currentnode == goalNode) {
             ReachedGoal = true;
             //Backtrack the solution and find path
             stack<Node*> path;
             path.push(currentnode);
             while (currentnode->hasParent()) {
-                currentnode = maze.map[currentnode->getParentX()][currentnode->getParentY()];
-                if (currentnode->getName() =='.') currentnode->setName((char)(currentnode->getCost()+48));
+                currentnode = maze.map[currentnode->getParentX()][currentnode->getParentY()];//Move currentnode to the parent node 
+                if (currentnode->getName() =='.') currentnode->setName((char)(currentnode->getCost()+48)); //+48 (ascii of 0) to display the costs
                 path.push(currentnode);
             }
             cout << "Solution path: ";
-            while (!path.empty()) {
+            while (!path.empty()) { //Display path nicely
                 if (!( (int)(path.top()->getName())>=int('0') && (int)(path.top()->getName()) <= int('9')) && path.top()->getName() != '.' && path.top()->getName() != ' ')
                     cout << path.top()->getName();
                 cout << '(' << path.top()->getX() << ',' << path.top()->getY() << ") ";
@@ -401,7 +422,7 @@ void DA(Map& maze){
         }
         currentnode->setVisited(true);
         if (currentnode->getName() == ' ') currentnode->setName('.');
-
+        //IF NOT FOUND GOAL:
         if (!ReachedGoal)//Find the node:
             for (int i = 0; i < maze.map.size(); i++) {
                 for (int j = 0; j < maze.map[i].size(); j++) {
@@ -456,8 +477,8 @@ int main() {
     bool mapLoaded = false;
     bool hasGoal = false;
     bool hasStart = false;
-    // Need to check if maze loaded before setstart/goal and if start and goal been set before BFS,DFS,DA.
-
+    
+    //Loop while the user has entered a valid choice
 	while (choice >= 1 && choice <= 9 && !quit) {
 		switch (choice) {
 		case 1:
