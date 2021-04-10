@@ -11,17 +11,21 @@ using namespace std;
 
 /*
 Classes for:
-Node -> x,y,name,isVisited,char,cost,left,right,up,down,parentx,parenty,status(char . or o)
+Node -> x,y,name,isVisited,char,cost,left,right,up,down,parentx,parenty
 Map -> 2D array of nodes. start, goal
 */
 
+//Node class for storing individual grid information of Maps
 class Node {
 private :
-    int x, y, cost, parentx, parenty;
-    bool left, right, up, down, isStart, isGoal, isVisited;
-    char status = ' ';
+    int x, y, cost, parentx, parenty; //x and y coordinates of the node is stored here. Cost variable stores cost of node traversal for DA function (cost is taken from map file).
+    //parent x and y used to store coordinates of parent nodes in search algorithms, used to backtrack paths.
+    bool left, right, up, down, isStart, isGoal, isVisited; //Basic node components to indicate items around the Node and its properties, 
+    //such as being the start or goal and whether it has already been visited in the search algoritm.
     char name = ' ';
+    //Display name for Nodes on the map, mainly used for points (i.e A, B, C, etc.).
 public:
+    //Constructor to set all private members mentioned above with appropriate default values
     Node(int nx = -1, int ny = -1, int ncost = -1, bool nleft = false , bool nright = false, bool nup = false, bool ndown = false, char nname=' ') {
         x = nx;
         y = ny;
@@ -37,11 +41,15 @@ public:
         isGoal = false;
         isVisited = false;
     }
+    
+    //Insertion operator for output of Node data, mainly used for debugging
     friend ostream& operator<< (ostream& outs, Node n) {
         outs << "(x,y) = (" << n.x << "," << n.y << "). Cost = " << n.cost << " left,right,up,down : "
             << n.left << n.right << n.up << n.down << " Name = " << n.name;
         return outs;
     }
+
+    //Setters and Getters for private members mentioned above
     char getName() { return name; }
     bool getRight() { return right; }
     bool getDown() { return down; }
@@ -63,14 +71,17 @@ public:
     int getParentX() { return parentx; }
 };
 
+//Map class that stores relevant information of the map. All nodes are stored in a 2D Vector of Node pointers in addition to a start and goal Node pointers.
 class Map {
 public:
     vector<vector<Node*>> map;
     Node* start;
     Node* goal;
 
+    //Constructor intializing the above mentioned members.
     Map() :start{}, goal{}, map{} {}
 
+    //isEmpty function that checks whether the map has data or is empty, used when the map is being displayed.
     bool isEmpty() const {
         if (map.size() == 0) {
             return true;
@@ -80,12 +91,15 @@ public:
         }
         return false;
     }
+    
+    //setters for start and goal pointers
     void setStart(Node* s) { start = s; }
     void setGoal(Node* g) { goal = g; }
 };
 
+//Handling of reading map data from text files done by loadMap, a Map object is sent via reference as a parameter and is laoded with the appropriate data.
 bool loadMap(Map& maze) {
-
+    //File reading
     string filename;
     cout << "Enter the name of the file:" << endl;
     cin >> filename;
@@ -97,6 +111,7 @@ bool loadMap(Map& maze) {
         return false;
     }
     cout << "Loading map..." << endl;
+    //Insertion of map data into map object
     char str1[100], str2[100], str3[100];
     in.getline(str1, 100);
     in.getline(str2, 100);
@@ -158,7 +173,7 @@ void displayMap(const Map& maze) {
     for (int i = 0; i < maze.map[0].size(); i++)
         cout << "---+";
     cout << endl;
-    //Middle rows:
+    //Middle rows and last row:
     for (int i = 0; i < maze.map.size(); i++) {
         cout << '|';
         for (int j = 0; j < maze.map[i].size(); j++) {
@@ -193,6 +208,7 @@ void displayMap(const Map& maze) {
     cout << endl;
 }
 
+//Sets the start point of the map by matching the user's input to the names of each Node. Error displayed if Node does not exist.
 bool setStart(Map& maze){
     char start;
     cout << "Enter the start point: ";
@@ -212,6 +228,7 @@ bool setStart(Map& maze){
     return false;
 }
 
+//Sets the goal point of the map by matching the user's input to the names of each Node. Error displayed if Node does not exist.
 bool setGoal(Map & maze){
     char goal;
     cout << "Enter the goal point: ";
@@ -231,7 +248,7 @@ bool setGoal(Map & maze){
     return false;
 }
 
-
+//Calculates the path using the DFS algorithm
 void DFS(Map& maze){
     Node* startNode = maze.start;
     Node* goalNode = maze.goal;
@@ -289,6 +306,7 @@ void DFS(Map& maze){
     cout << "No possible path found!" << endl << endl;
 }
 
+//Calculates the path using the BFS algorithm
 void BFS(Map& maze){
     Node* startNode = maze.start;
     Node* goalNode = maze.goal;
@@ -346,13 +364,14 @@ void BFS(Map& maze){
     cout << "No possible path found!" << endl << endl;
 }
 
+//Used for cost comparison in DA function
 struct compareCosts { // defining the comparison operator
     bool operator() (Node* & s1, Node* & s2) {
         return s1->getCost() > s2->getCost();
     }
 };
 
-
+//Uses the DA to find a path based on costs
 void DA(Map& maze){
     Node* startNode = maze.start;
     Node* goalNode = maze.goal;
@@ -411,7 +430,7 @@ void DA(Map& maze){
 }
 
 
-
+//Options for user:
 int menu() {
 	cout << "Menu:" << endl;
 	cout << "1.Load Map" << endl;
