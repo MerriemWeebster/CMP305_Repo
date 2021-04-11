@@ -37,7 +37,6 @@ void drawH( double x, double y, double len, Document& doc, Color color ) {
 
 //  plot a H-tree of order n centered at x,y of the given length
 void drawHtree( int n, double x, double y, double len, Document& doc, Color color ) {
-    //Your code goes here
     if (n == 1) return;
     
     drawH(x - len / 2, y - len / 2, len / 2, doc, color);
