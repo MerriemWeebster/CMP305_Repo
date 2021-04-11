@@ -20,6 +20,6 @@ Value Sum(Iter it1, Iter it2, Value sum) {
 
 int main() {
 	vector<double> arr = { 1,2,3,4,5,6,7,8,9,10 };
-	cout << Sum(arr.begin(), arr.end()) << endl;
+	cout << Sum(arr.begin(), arr.end(),0.0) << endl;
 	return 0;
 }
