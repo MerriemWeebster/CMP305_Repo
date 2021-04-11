@@ -24,14 +24,14 @@ double PI(int n = 3)
 
     return fraction + PI(--n);
 }
-
+/*
 int main()
 {
     int n;
     cout << "Enter how many terms of PI to calculate: ";
     cin >> n;
 
-    cout << PI(n);
+    cout << PIAcc(n);
 
     return 0;
-}
+}*/
