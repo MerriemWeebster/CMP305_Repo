@@ -3,6 +3,9 @@
 <svg width="340px" height="340px" xmlns="http://www.w3.org/2000/svg" version="1.1" >
 	<rect x="0" y="0" width="340" height="340" fill="rgb(0,0,0)" />
 	<text x="10" y="16" fill="rgb(0,128,0)" font-size="10" font-family="Verdana" >H-tree Fractal</text>
+	<polyline points="85,85 85,255 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
+	<polyline points="255,85 255,255 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
+	<polyline points="85,170 255,170 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
 	<polyline points="42.5,42.5 42.5,127.5 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
 	<polyline points="127.5,42.5 127.5,127.5 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
 	<polyline points="42.5,85 127.5,85 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
@@ -27,54 +30,6 @@
 	<polyline points="106.25,106.25 106.25,148.75 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
 	<polyline points="148.75,106.25 148.75,148.75 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
 	<polyline points="106.25,127.5 148.75,127.5 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="10.625,10.625 10.625,31.875 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="31.875,10.625 31.875,31.875 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="10.625,21.25 31.875,21.25 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="10.625,53.125 10.625,74.375 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="31.875,53.125 31.875,74.375 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="10.625,63.75 31.875,63.75 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="53.125,10.625 53.125,31.875 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="74.375,10.625 74.375,31.875 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="53.125,21.25 74.375,21.25 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="53.125,53.125 53.125,74.375 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="74.375,53.125 74.375,74.375 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="53.125,63.75 74.375,63.75 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="10.625,95.625 10.625,116.875 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="31.875,95.625 31.875,116.875 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="10.625,106.25 31.875,106.25 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="10.625,138.125 10.625,159.375 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="31.875,138.125 31.875,159.375 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="10.625,148.75 31.875,148.75 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="53.125,95.625 53.125,116.875 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="74.375,95.625 74.375,116.875 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="53.125,106.25 74.375,106.25 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="53.125,138.125 53.125,159.375 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="74.375,138.125 74.375,159.375 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="53.125,148.75 74.375,148.75 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="95.625,10.625 95.625,31.875 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="116.875,10.625 116.875,31.875 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="95.625,21.25 116.875,21.25 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="95.625,53.125 95.625,74.375 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="116.875,53.125 116.875,74.375 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="95.625,63.75 116.875,63.75 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="138.125,10.625 138.125,31.875 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="159.375,10.625 159.375,31.875 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="138.125,21.25 159.375,21.25 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="138.125,53.125 138.125,74.375 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="159.375,53.125 159.375,74.375 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="138.125,63.75 159.375,63.75 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="95.625,95.625 95.625,116.875 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="116.875,95.625 116.875,116.875 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="95.625,106.25 116.875,106.25 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="95.625,138.125 95.625,159.375 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="116.875,138.125 116.875,159.375 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="95.625,148.75 116.875,148.75 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="138.125,95.625 138.125,116.875 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="159.375,95.625 159.375,116.875 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="138.125,106.25 159.375,106.25 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="138.125,138.125 138.125,159.375 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="159.375,138.125 159.375,159.375 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="138.125,148.75 159.375,148.75 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
 	<polyline points="21.25,191.25 21.25,233.75 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
 	<polyline points="63.75,191.25 63.75,233.75 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
 	<polyline points="21.25,212.5 63.75,212.5 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
@@ -87,54 +42,6 @@
 	<polyline points="106.25,276.25 106.25,318.75 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
 	<polyline points="148.75,276.25 148.75,318.75 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
 	<polyline points="106.25,297.5 148.75,297.5 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="10.625,180.625 10.625,201.875 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="31.875,180.625 31.875,201.875 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="10.625,191.25 31.875,191.25 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="10.625,223.125 10.625,244.375 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="31.875,223.125 31.875,244.375 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="10.625,233.75 31.875,233.75 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="53.125,180.625 53.125,201.875 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="74.375,180.625 74.375,201.875 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="53.125,191.25 74.375,191.25 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="53.125,223.125 53.125,244.375 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="74.375,223.125 74.375,244.375 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="53.125,233.75 74.375,233.75 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="10.625,265.625 10.625,286.875 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="31.875,265.625 31.875,286.875 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="10.625,276.25 31.875,276.25 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="10.625,308.125 10.625,329.375 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="31.875,308.125 31.875,329.375 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="10.625,318.75 31.875,318.75 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="53.125,265.625 53.125,286.875 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="74.375,265.625 74.375,286.875 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="53.125,276.25 74.375,276.25 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="53.125,308.125 53.125,329.375 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="74.375,308.125 74.375,329.375 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="53.125,318.75 74.375,318.75 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="95.625,180.625 95.625,201.875 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="116.875,180.625 116.875,201.875 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="95.625,191.25 116.875,191.25 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="95.625,223.125 95.625,244.375 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="116.875,223.125 116.875,244.375 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="95.625,233.75 116.875,233.75 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="138.125,180.625 138.125,201.875 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="159.375,180.625 159.375,201.875 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="138.125,191.25 159.375,191.25 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="138.125,223.125 138.125,244.375 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="159.375,223.125 159.375,244.375 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="138.125,233.75 159.375,233.75 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="95.625,265.625 95.625,286.875 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="116.875,265.625 116.875,286.875 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="95.625,276.25 116.875,276.25 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="95.625,308.125 95.625,329.375 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="116.875,308.125 116.875,329.375 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="95.625,318.75 116.875,318.75 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="138.125,265.625 138.125,286.875 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="159.375,265.625 159.375,286.875 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="138.125,276.25 159.375,276.25 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="138.125,308.125 138.125,329.375 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="159.375,308.125 159.375,329.375 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="138.125,318.75 159.375,318.75 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
 	<polyline points="191.25,21.25 191.25,63.75 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
 	<polyline points="233.75,21.25 233.75,63.75 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
 	<polyline points="191.25,42.5 233.75,42.5 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
@@ -147,54 +54,6 @@
 	<polyline points="276.25,106.25 276.25,148.75 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
 	<polyline points="318.75,106.25 318.75,148.75 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
 	<polyline points="276.25,127.5 318.75,127.5 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="180.625,10.625 180.625,31.875 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="201.875,10.625 201.875,31.875 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="180.625,21.25 201.875,21.25 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="180.625,53.125 180.625,74.375 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="201.875,53.125 201.875,74.375 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="180.625,63.75 201.875,63.75 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="223.125,10.625 223.125,31.875 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="244.375,10.625 244.375,31.875 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="223.125,21.25 244.375,21.25 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="223.125,53.125 223.125,74.375 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="244.375,53.125 244.375,74.375 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="223.125,63.75 244.375,63.75 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="180.625,95.625 180.625,116.875 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="201.875,95.625 201.875,116.875 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="180.625,106.25 201.875,106.25 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="180.625,138.125 180.625,159.375 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="201.875,138.125 201.875,159.375 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="180.625,148.75 201.875,148.75 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="223.125,95.625 223.125,116.875 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="244.375,95.625 244.375,116.875 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="223.125,106.25 244.375,106.25 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="223.125,138.125 223.125,159.375 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="244.375,138.125 244.375,159.375 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="223.125,148.75 244.375,148.75 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="265.625,10.625 265.625,31.875 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="286.875,10.625 286.875,31.875 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="265.625,21.25 286.875,21.25 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="265.625,53.125 265.625,74.375 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="286.875,53.125 286.875,74.375 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="265.625,63.75 286.875,63.75 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="308.125,10.625 308.125,31.875 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="329.375,10.625 329.375,31.875 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="308.125,21.25 329.375,21.25 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="308.125,53.125 308.125,74.375 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="329.375,53.125 329.375,74.375 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="308.125,63.75 329.375,63.75 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="265.625,95.625 265.625,116.875 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="286.875,95.625 286.875,116.875 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="265.625,106.25 286.875,106.25 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="265.625,138.125 265.625,159.375 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="286.875,138.125 286.875,159.375 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="265.625,148.75 286.875,148.75 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="308.125,95.625 308.125,116.875 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="329.375,95.625 329.375,116.875 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="308.125,106.25 329.375,106.25 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="308.125,138.125 308.125,159.375 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="329.375,138.125 329.375,159.375 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="308.125,148.75 329.375,148.75 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
 	<polyline points="191.25,191.25 191.25,233.75 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
 	<polyline points="233.75,191.25 233.75,233.75 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
 	<polyline points="191.25,212.5 233.75,212.5 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
@@ -207,52 +66,4 @@
 	<polyline points="276.25,276.25 276.25,318.75 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
 	<polyline points="318.75,276.25 318.75,318.75 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
 	<polyline points="276.25,297.5 318.75,297.5 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="180.625,180.625 180.625,201.875 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="201.875,180.625 201.875,201.875 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="180.625,191.25 201.875,191.25 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="180.625,223.125 180.625,244.375 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="201.875,223.125 201.875,244.375 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="180.625,233.75 201.875,233.75 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="223.125,180.625 223.125,201.875 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="244.375,180.625 244.375,201.875 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="223.125,191.25 244.375,191.25 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="223.125,223.125 223.125,244.375 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="244.375,223.125 244.375,244.375 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="223.125,233.75 244.375,233.75 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="180.625,265.625 180.625,286.875 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="201.875,265.625 201.875,286.875 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="180.625,276.25 201.875,276.25 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="180.625,308.125 180.625,329.375 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="201.875,308.125 201.875,329.375 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="180.625,318.75 201.875,318.75 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="223.125,265.625 223.125,286.875 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="244.375,265.625 244.375,286.875 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="223.125,276.25 244.375,276.25 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="223.125,308.125 223.125,329.375 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="244.375,308.125 244.375,329.375 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="223.125,318.75 244.375,318.75 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="265.625,180.625 265.625,201.875 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="286.875,180.625 286.875,201.875 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="265.625,191.25 286.875,191.25 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="265.625,223.125 265.625,244.375 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="286.875,223.125 286.875,244.375 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="265.625,233.75 286.875,233.75 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="308.125,180.625 308.125,201.875 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="329.375,180.625 329.375,201.875 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="308.125,191.25 329.375,191.25 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="308.125,223.125 308.125,244.375 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="329.375,223.125 329.375,244.375 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="308.125,233.75 329.375,233.75 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="265.625,265.625 265.625,286.875 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="286.875,265.625 286.875,286.875 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="265.625,276.25 286.875,276.25 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="265.625,308.125 265.625,329.375 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="286.875,308.125 286.875,329.375 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="265.625,318.75 286.875,318.75 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="308.125,265.625 308.125,286.875 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="329.375,265.625 329.375,286.875 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="308.125,276.25 329.375,276.25 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="308.125,308.125 308.125,329.375 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="329.375,308.125 329.375,329.375 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
-	<polyline points="308.125,318.75 329.375,318.75 " fill="none" stroke-width="1" stroke="rgb(0,128,0)" />
 </svg>
