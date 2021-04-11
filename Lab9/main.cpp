@@ -39,7 +39,17 @@ void drawH( double x, double y, double len, Document& doc, Color color ) {
 void drawHtree( int n, double x, double y, double len, Document& doc, Color color ) {
    
     //Your code goes here
-   
+    if (n == 0) return;
+    
+    drawH(x - len / 2, y - len / 2, len / 2, doc, color);
+    drawH(x - len / 2, y + len / 2, len / 2, doc, color);
+    drawH(x + len / 2, y - len / 2, len / 2, doc, color);
+    drawH(x + len / 2, y + len / 2, len / 2, doc, color);
+
+    drawHtree(n-1, x - len / 2, y - len / 2, len / 2, doc, color);
+    drawHtree(n-1,x - len / 2, y + len / 2, len / 2, doc, color);
+    drawHtree(n-1,x + len / 2, y - len / 2, len / 2, doc, color);
+    drawHtree(n-1,x + len / 2, y + len / 2, len / 2, doc, color);
    
  
 }
@@ -56,10 +66,8 @@ int main() {
 
    
     drawH(SIZE/2, SIZE/2, SIZE/2, doc, Color::Green);
-    //drawHtree( 3, SIZE/2, SIZE/2, SIZE/2, doc, Color::Green );
+    drawHtree( 3, SIZE/2, SIZE/2, SIZE/2, doc, Color::Green );
 
     // end of your code
     doc.save();
 }
-
-
