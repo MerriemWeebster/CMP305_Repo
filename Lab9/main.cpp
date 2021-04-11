@@ -49,7 +49,7 @@ void drawHtree( int n, double x, double y, double len, Document& doc, Color colo
     drawHtree(n-1,x + len / 2, y - len / 2, len / 2, doc, color);
     drawHtree(n-1,x + len / 2, y + len / 2, len / 2, doc, color);
 }
-/*
+
 int main() {
     const int SIZE {340};             // dimensions of the square image
     string FILE {"ztest_image.svg"};  // name of the saved image file
@@ -66,4 +66,4 @@ int main() {
 
     // end of your code
     doc.save();
-}*/
+}
