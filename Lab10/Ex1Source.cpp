@@ -12,8 +12,27 @@ struct TreeNode
 
 };
 
-
-
+template <typename Object>
+int height(TreeNode<Object> *node, int d=0)
+{
+  if(node->firstChild != nullptr)
+  {
+    if(node->nextSibling == nullptr)
+      return height(node->firstChild, d + 1);
+    else
+    {
+      int hSibling = height(node->nextSibling, d), hChild = height( node->firstChild, d + 1);
+      return (hSibling > hChild) ? hSibling : hChild;
+    }
+  }
+  else
+  {
+    if(node->nextSibling == nullptr)
+      return d;
+    else
+      return height(node->nextSibling, d);
+  }
+}
 
 int main()
 {
@@ -31,6 +50,9 @@ int main()
     TreeNode<char> *l = new TreeNode<char>('L', nullptr, nullptr);
     TreeNode<char> *m = new TreeNode<char>('M', nullptr, nullptr);
     TreeNode<char> *n = new TreeNode<char>('N', nullptr, nullptr);
+    TreeNode<char> *o = new TreeNode<char>('N', nullptr, nullptr);
+    TreeNode<char> *p = new TreeNode<char>('N', nullptr, nullptr);
+    TreeNode<char> *q = new TreeNode<char>('N', nullptr, nullptr);
     
     root->firstChild = b;
     b->nextSibling = c;
@@ -42,6 +64,10 @@ int main()
     f->firstChild = k;
     f->nextSibling = g;
     g->nextSibling = n;
+    n->firstChild = o;
+    o->nextSibling = p;
+    o->firstChild = q;
+    
   //Continue creating TreeNodes
 
 }
