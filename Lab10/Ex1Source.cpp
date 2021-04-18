@@ -43,7 +43,7 @@ int height(TreeNode<Object> *node, int d=0)
 
   return (hMax > d) ? hMax : d;
 }
-
+/*
 int main()
 {
     TreeNode<char> *root = new TreeNode<char>('A', nullptr,nullptr);
@@ -83,4 +83,4 @@ int main()
     cout << "The depth of node O is: " << depth(root, o) << endl;
     cout << "The depth of node D is: " << depth(root, d) << endl;
     cout << "The depth of node A is: " << depth(root, root) << endl;
-}
+}*/

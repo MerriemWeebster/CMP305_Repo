@@ -97,17 +97,42 @@ void MakeTree(string expr, BinaryNode<Object> *node, int& pos)
 template <typename Object>
 void preFix(BinaryNode<Object>* node)
 {
-    
+    if(node->element=='*'|| node->element == '/'|| node->element == '+'|| node->element == '-')
+        cout << "(";
+    cout << node->element << " ";
+    if (node->left != nullptr) {
+        preFix(node->left);
+    }
+
+    if (node->right != nullptr) {
+        preFix(node->right);
+        cout << ")";
+    }
 }
 template <typename Object>
 void inFix(BinaryNode<Object>* node)
 {
-    
+    if (node->left != nullptr) {
+        cout << "(";
+        inFix(node->left);
+    }
+    cout << node->element;
+    if (node->right != nullptr) {
+        inFix(node->right);
+        cout << ")";
+    }
     
 }
 template <typename Object>
 void postFix(BinaryNode<Object>* node)
 {
-     
+    if (node->left != nullptr) {
+        postFix(node->left);
+    }
+    
+    if (node->right != nullptr) {
+        postFix(node->right);
+    }
+    cout << node->element<<" ";
 }
 
