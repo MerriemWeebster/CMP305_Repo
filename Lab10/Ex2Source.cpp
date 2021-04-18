@@ -24,7 +24,7 @@ void postFix(BinaryNode<Object>* node);
 template <typename Object>
 void inFix(BinaryNode<Object>* node);
 
-
+/*
 int main()
 {
     string a = "(((a+b)*c)+(((d-e)*f)/g))";
@@ -52,7 +52,7 @@ int main()
     return 0;
     
 }
-
+*/
 //A recursive function that takes an expression and makes the tree
 template <typename Object>
 void MakeTree(string expr, BinaryNode<Object> *node, int& pos)
