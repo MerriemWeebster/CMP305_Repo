@@ -11,7 +11,7 @@ struct BinaryNode
         : element{ theElement }, left{ lt }, right{ rt } { }
 
 };
-/*
+
 template <typename Object>
 void MakeTree(string expr, BinaryNode<Object> *node, int& pos);
 
@@ -110,4 +110,4 @@ void postFix(BinaryNode<Object>* node)
 {
      
 }
-*/
+
