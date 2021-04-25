@@ -161,9 +161,7 @@ class BinarySearchTree
 
   bool isFull()
     {
-        int size=0;
-       int ht=  calculateHeightAndSize(root,size);
-        if (size ==)
+        
     }
 
   private:
@@ -202,7 +200,16 @@ class BinarySearchTree
     }
     
     void mirror(BinaryNode *&  t)    {
-        
+        if (t == nullptr) return;
+        mirror(t->left);
+        mirror(t->right);
+        //Negate the value:
+        t->element = -1 * t->element;
+        //Swap left and right subtrees:
+        BinaryNode* temp;
+        temp = t->left;
+        t->left = t->right;
+        t->right = temp;
     }
 
      int calculateHeightAndSize(BinaryNode *  t, int& size)
