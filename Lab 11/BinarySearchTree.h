@@ -161,7 +161,9 @@ class BinarySearchTree
 
   bool isFull()
     {
-        
+        int size=0;
+       int ht=  calculateHeightAndSize(root,size);
+        if (size ==)
     }
 
   private:
@@ -212,7 +214,7 @@ class BinarySearchTree
         t->right = temp;
     }
 
-     int calculateHeightAndSize(BinaryNode *  t, int& size)
+    int calculateHeightAndSize(BinaryNode *  t, int& size)
 	{
 
   	}
