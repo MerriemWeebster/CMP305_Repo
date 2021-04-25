@@ -201,9 +201,19 @@ class BinarySearchTree
             ;  // Duplicate; do nothing
     }
     
-    void mirror(BinaryNode *&  t)    {
-        
+    void mirror(BinaryNode*& t) {
+        if (t == nullptr) return;
+        mirror(t->left);
+        mirror(t->right);
+        //Negate the value:
+        t->element = -1 * t->element;
+        //Swap left and right subtrees:
+        BinaryNode* temp;
+        temp = t->left;
+        t->left = t->right;
+        t->right = temp;
     }
+
 
     pair<int, int> calculateHeightAndSize(BinaryNode* t, int height = 0)
     {
