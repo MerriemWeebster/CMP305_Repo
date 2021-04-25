@@ -1,7 +1,7 @@
 #include<iostream>
 #include"BinarySearchTree.h"
 using namespace std;
-
+/*
 int main() {
 
 	BinarySearchTree<int> bst{};
@@ -24,4 +24,4 @@ int main() {
 	else cout << "The BST is NOT Full!" << endl;
 
 	return 0;
-}
+}*/

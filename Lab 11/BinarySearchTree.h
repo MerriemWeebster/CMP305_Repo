@@ -102,6 +102,11 @@ class BinarySearchTree
         return contains( x, root );
     }
 
+    Comparable contains2(const Comparable& x) const
+    {
+        return contains2(x, root);
+    }
+
     /**
      * Test if the tree is logically empty.
      * Return true if empty, false otherwise.
@@ -312,16 +317,27 @@ class BinarySearchTree
      * x is item to search for.
      * t is the node that roots the subtree.
      */
-    bool contains( const Comparable & x, BinaryNode *t ) const
+    bool contains(const Comparable& x, BinaryNode* t) const
     {
-        if( t == nullptr )
+        if (t == nullptr)
             return false;
-        else if( x < t->element )
-            return contains( x, t->left );
-        else if( t->element < x )
-            return contains( x, t->right );
+        else if (x < t->element)
+            return contains(x, t->left);
+        else if (t->element < x)
+            return contains(x, t->right);
         else
             return true;    // Match
+    }
+    Comparable contains2(const Comparable& x, BinaryNode* t) const
+    {
+        if (t == nullptr)
+            return NULL;
+        else if (x < t->element)
+            return contains(x, t->left);
+        else if (t->element < x)
+            return contains(x, t->right);
+        else
+            return x;    // Match
     }
 /****** NONRECURSIVE VERSION*************************
     bool contains( const Comparable & x, BinaryNode *t ) const
