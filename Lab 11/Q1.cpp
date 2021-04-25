@@ -11,14 +11,14 @@ int main() {
 	bst.insert(1);
 	bst.insert(8);
 	bst.insert(6);
-	bst.insert(7);
+	bst.insert(9);
 	cout << "BST Before Mirror: " << endl;
 	bst.printTree();
 
 	cout << "BST After Mirror: " << endl;
 	bst.mirror();
 	bst.printTree();
-
+	
 	cout << endl << endl;
 	if (bst.isFull()) cout << "The BST is Full!" << endl;
 	else cout << "The BST is NOT Full!" << endl;

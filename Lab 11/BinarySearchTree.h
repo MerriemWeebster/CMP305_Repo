@@ -161,7 +161,9 @@ class BinarySearchTree
 
   bool isFull()
     {
-        
+      pair<int, int> x = calculateHeightAndSize(this->root );
+      return(x.second == (pow(2, x.first + 1) - 1));
+
     }
 
   private:
@@ -212,10 +214,24 @@ class BinarySearchTree
         t->right = temp;
     }
 
-     int calculateHeightAndSize(BinaryNode *  t, int& size)
-	{
-
-  	}
+    pair<int, int> calculateHeightAndSize(BinaryNode* t, int height = 0)
+    {
+        if (t != nullptr)
+        {
+            pair<int, int> x = calculateHeightAndSize(t->left, height + 1);
+            pair<int, int> y = calculateHeightAndSize(t->right, height + 1);
+            pair<int, int> ans;
+            ans.first = (x.first > y.first ? x.first : y.first);
+            ans.second = (x.second + y.second + 1);
+            return ans ;
+        }
+        else
+        {
+            pair<int, int> x2;
+            x2.first = height-1; x2.second = 0;
+            return x2;
+        }
+    }
     
   
     /**
