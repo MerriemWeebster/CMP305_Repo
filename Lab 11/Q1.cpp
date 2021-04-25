@@ -18,5 +18,10 @@ int main() {
 	cout << "BST After Mirror: " << endl;
 	bst.mirror();
 	bst.printTree();
+
+	cout << endl << endl;
+	if (bst.isFull()) cout << "The BST is Full!" << endl;
+	else cout << "The BST is NOT Full!" << endl;
+
 	return 0;
 }
