@@ -23,6 +23,7 @@ using namespace std;
 template <typename Comparable>
 class BinarySearchTree
 {
+
   public:
     BinarySearchTree( ) : root{ nullptr }
     {
@@ -170,23 +171,66 @@ class BinarySearchTree
       return(x.second == (pow(2, x.first + 1) - 1));
 
     }
+  /////// Q3 BONUS CODE:
 
+  int childrenDiff(int threshold) {
+      return childrenDiff(threshold, root);
+  }
+
+  bool isSumOfPath(int sum) {
+      return isSumOfPath(sum, root);
+  }
   private:
-    struct BinaryNode
-    {
-        Comparable element;
-        BinaryNode *left;
-        BinaryNode *right;
+      struct BinaryNode
+      {
+          Comparable element;
+          BinaryNode* left;
+          BinaryNode* right;
 
-        BinaryNode( const Comparable & theElement, BinaryNode *lt, BinaryNode *rt )
-          : element{ theElement }, left{ lt }, right{ rt } { }
-        
-        BinaryNode( Comparable && theElement, BinaryNode *lt, BinaryNode *rt )
-          : element{ std::move( theElement ) }, left{ lt }, right{ rt } { }
-    };
+          BinaryNode(const Comparable& theElement, BinaryNode* lt, BinaryNode* rt)
+              : element{ theElement }, left{ lt }, right{ rt } { }
+
+          BinaryNode(Comparable&& theElement, BinaryNode* lt, BinaryNode* rt)
+              : element{ std::move(theElement) }, left{ lt }, right{ rt } { }
+      };
+    
 
     BinaryNode *root;
 
+
+    int childrenDiff(int threshold, BinaryNode* node) {
+        int count = 0;
+
+        if (node != nullptr)
+        {
+            if (node->left != nullptr)
+                count += childrenDiff(threshold, node->left);
+
+            if (node->right != nullptr)
+                count += childrenDiff(threshold, node->right);
+
+            if (node->left != nullptr && node->right != nullptr)
+            {
+                if (node->left->element - node->right->element > threshold || node->right->element - node->left->element > threshold)
+                    count++;
+            }
+        }
+
+        return count;
+    }
+
+    bool isSumOfPath(int sum, BinaryNode* node, int value = 0)
+    {
+        if (node != nullptr)
+        {
+            value += node->element;
+            return (isSumOfPath(sum, node->left, value) || isSumOfPath(sum, node->right, value));
+        }
+        else
+        {
+            return value == sum;
+        }
+    }
 
     /**
      * Internal method to insert into a subtree.

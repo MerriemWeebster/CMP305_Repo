@@ -36,14 +36,13 @@ public:
 	}
 };
 
-
+/*
 int main() {
 	char buffer[25] = { '0' };
 	ifstream input("data.txt", ios::binary);
 	if (input.fail()) { cout << "Failed!"<<endl; }
 
 	BinarySearchTree<RecordLocation> bst{};
-
 	
 	int i = 0;
 	while (!input.eof()) {
@@ -52,6 +51,7 @@ int main() {
 		char id[3];
 		strncpy(id, buffer, 3);
 		int myid = stoi(id);
+		if (input.eof()) break;// Ensure we dont add the last node twice
 		RecordLocation temp(myid, i);
 		bst.insert(temp);
 		i++;
@@ -73,4 +73,4 @@ int main() {
 	input.close();
 
 	return 0;
-}
+}*/
