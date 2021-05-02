@@ -775,7 +775,7 @@ class AvlTree
         rotateWithRightChild( k1 );
     }
 };
-
+/*
 //////////////////// TEST PROGRAM////////////////////
 int main() {
     const int DATASIZE = 3000,  // total number of elements to be stored
@@ -825,6 +825,4 @@ int main() {
     cout << header;
     out << header;
     return 0;
-}
-
-
+}*/

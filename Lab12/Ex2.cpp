@@ -806,17 +806,19 @@ template <typename Object> void TestBalance(Object data[], int size) {
 
     BinarySearchTree<Object> bst;
     for (int i = 0; i < size; i++) bst.insert(data[i]);
-
+    bst.updateAvlBalance();
+    bst.printAvlBalance(1);
     //-> update balance values and print nodes that are not balanced
 }
 
 int main() {
+    cout << endl << "Tree number 1:" << endl;
     TestBalance(new int[15] {46,23,65,15,40,57,88,3,22,29,42,50,59,73,91}, 15);
-
+    cout << endl << "Tree number 2:" << endl;
     TestBalance(new int[15] {29,15,73,3,23,59,88,22,46,65,91,42,50,40,57}, 15);
-
+    cout << endl << "Tree number 3:" << endl;
     TestBalance(new int[15] {3,50,46,65,29,57,73,15,40,59,91,22,42,88,23}, 15);
-
+    cout << endl << "Tree number 4:" << endl;
     TestBalance(new char[7] {'R','U','H','C','K','A','E'}, 7);
     
     return 0;
