@@ -785,7 +785,7 @@ int main() {
     vector<int> data;
     for (int i = 1; i <= DATASIZE; i++) data.push_back(i);
     AvlTree<int> avl; BinarySearchTree<int> bst;
-    //ofstream out("results.csv");
+    ofstream out("C:/Users/rohan/Desktop/AUS Year 2/Sem 4/Data Structures and Algorithms/Labs/CMP305_Repo/Lab12/results.csv");
     
     for (int n = DATASIZE/NBSAMPLES; n <= DATASIZE; n += DATASIZE/NBSAMPLES) {
         int avlHeight, avlMax = 0, avlMin = DATASIZE, avlAvg = 0,
@@ -812,14 +812,18 @@ int main() {
         string result = to_string(n) + "\t  |\t  " + to_string(avlMin)
                 + "\t  " + to_string(avlAvg/NBTREES) + "\t  "
                 + to_string(avlMax) + "\t  |\t  " + to_string(bstMin) + "\t  "
-                + to_string(bstAvg/NBTREES) + "\t  " + to_string(bstMax) + "\n";
+                + to_string(bstAvg/NBTREES) + "\t,  " + to_string(bstMax) + "\n";
         cout << result;
-        //out << result;
+        string resultcsv = to_string(n) + "," + to_string(avlMin)
+            + "," + to_string(avlAvg / NBTREES) + ","
+            + to_string(avlMax) + ",  " + to_string(bstMin) + ","
+            + to_string(bstAvg / NBTREES) + "," + to_string(bstMax) + "\n";
+        out << resultcsv;
     }
 
     string header = "N\t  |\tavlMin\tavlAvg\tavlMax\t  |\tbstMin\tbstAvg\tbstMax\n";
     cout << header;
-    // out << header;
+    out << header;
     return 0;
 }
 
