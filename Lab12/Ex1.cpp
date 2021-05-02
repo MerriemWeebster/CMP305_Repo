@@ -781,11 +781,11 @@ int main() {
     const int DATASIZE = 3000,  // total number of elements to be stored
               NBSAMPLES =  30,  // number of sample points for benchmarking
               NBTREES =   100,  // number of trees generated for averaging
-              SORTED =      0;  // percentage of input data that is sorted
+              SORTED =      1;  // percentage of input data that is sorted
     vector<int> data;
     for (int i = 1; i <= DATASIZE; i++) data.push_back(i);
     AvlTree<int> avl; BinarySearchTree<int> bst;
-    ofstream out("C:/Users/rohan/Desktop/AUS Year 2/Sem 4/Data Structures and Algorithms/Labs/CMP305_Repo/Lab12/results.csv");
+    ofstream out("C:/Users/rohan/Desktop/AUS Year 2/Sem 4/Data Structures and Algorithms/Labs/CMP305_Repo/Lab12/results 1.csv");
     
     for (int n = DATASIZE/NBSAMPLES; n <= DATASIZE; n += DATASIZE/NBSAMPLES) {
         int avlHeight, avlMax = 0, avlMin = DATASIZE, avlAvg = 0,
